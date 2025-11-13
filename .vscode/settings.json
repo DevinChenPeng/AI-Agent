@@ -1,11 +1,38 @@
 {
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"css.lint.validProperties": [
+		"composes"
+	],
+	"css.customData": [],
+	"editor.colorDecorators": true,
+	"editor.inlineSuggest.enabled": true,
+	"cssvar.files": [
+		"src/renderer/src/styles/css/**/*.css"
+	],
+	"cssvar.extensions": [
+		"css",
+		"less",
+		"tsx",
+		"ts",
+		"jsx",
+		"js"
+	],
+	"cssvar.ignore": [
+		"node_modules",
+		"dist",
+		"out",
+		"build"
+	],
+	"cssvar.enable": true
 }

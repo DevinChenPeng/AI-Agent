@@ -8,8 +8,8 @@ function createWindow(): void {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width,
-    height,
+    width: width / 2,
+    height: height / 2,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -51,6 +51,7 @@ app.whenReady().then(() => {
 
     // 处理证书验证错误
     session.defaultSession.setCertificateVerifyProc((request, callback) => {
+      console.log(request)
       callback(0) // 0 表示接受证书
     })
   }
