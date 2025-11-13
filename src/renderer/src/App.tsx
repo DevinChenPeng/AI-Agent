@@ -1,7 +1,7 @@
 import { HashRouter as Router, useRoutes } from 'react-router-dom'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import routes from '@renderer/routes'
-import Layout from '@renderer/components/layout'
+import Layout from '@renderer/layout'
 import theme from '@renderer/untils/MUITheme'
 function AppRoutes(): React.JSX.Element | null {
   return useRoutes(routes)

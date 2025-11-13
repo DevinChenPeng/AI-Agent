@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen, session } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -43,6 +43,17 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
+
+  // 处理 SSL 证书错误（仅在开发环境）
+  if (is.dev) {
+    // 忽略开发环境的证书错误
+    app.commandLine.appendSwitch('ignore-certificate-errors')
+
+    // 处理证书验证错误
+    session.defaultSession.setCertificateVerifyProc((request, callback) => {
+      callback(0) // 0 表示接受证书
+    })
+  }
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
