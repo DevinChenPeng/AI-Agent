@@ -8,7 +8,7 @@
       "  $2",
       "}",
       "",
-      "const ${1:ComponentName}: FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "const ${1:ComponentName}: FC<${1:ComponentName}Props> = (props) => {",
       "  return (",
       "    <div className=\"${4:container}\">",
       "      $0",

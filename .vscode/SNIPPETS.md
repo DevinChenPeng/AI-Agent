@@ -9,13 +9,13 @@
 import { FC } from 'react'
 
 interface ComponentNameProps {
-  
+
 }
 
-const ComponentName: FC<ComponentNameProps> = ({  }) => {
+const ComponentName: FC<ComponentNameProps> = (props) => {
   return (
     <div className="container">
-      
+
     </div>
   )
 }
@@ -30,7 +30,7 @@ import { FC } from 'react'
 const ComponentName: FC = () => {
   return (
     <div className="container">
-      
+
     </div>
   )
 }
@@ -43,7 +43,7 @@ export default ComponentName
 import { FC, useState } from 'react'
 
 interface ComponentNameProps {
-  
+
 }
 
 const ComponentName: FC<ComponentNameProps> = ({  }) => {
@@ -51,7 +51,7 @@ const ComponentName: FC<ComponentNameProps> = ({  }) => {
 
   return (
     <div className="container">
-      
+
     </div>
   )
 }
@@ -64,17 +64,17 @@ export default ComponentName
 import { FC, useEffect } from 'react'
 
 interface ComponentNameProps {
-  
+
 }
 
 const ComponentName: FC<ComponentNameProps> = ({  }) => {
   useEffect(() => {
-    
+
   }, [])
 
   return (
     <div className="container">
-      
+
     </div>
   )
 }
@@ -87,13 +87,13 @@ export default ComponentName
 import { FC } from 'react'
 
 interface ComponentNameProps {
-  
+
 }
 
 export const ComponentName: FC<ComponentNameProps> = ({  }) => {
   return (
     <div className="container">
-      
+
     </div>
   )
 }
@@ -109,7 +109,7 @@ const [state, setState] = useState()
 ### `ueh` - useEffect
 ```tsx
 useEffect(() => {
-  
+
 }, [])
 ```
 
@@ -117,7 +117,7 @@ useEffect(() => {
 ```tsx
 const memoizedCallback = useCallback(
   () => {
-    
+
   },
   []
 )
@@ -126,7 +126,7 @@ const memoizedCallback = useCallback(
 ### `umm` - useMemo
 ```tsx
 const memoizedValue = useMemo(() => {
-  return 
+  return
 }, [])
 ```
 
@@ -140,14 +140,14 @@ const ref = useRef()
 ### `tsi` - TypeScript Interface
 ```tsx
 interface InterfaceName {
-  
+
 }
 ```
 
 ### `tst` - TypeScript Type
 ```tsx
 type TypeName = {
-  
+
 }
 ```
 
@@ -173,10 +173,10 @@ console.log('label:', )
 ### `tryc` - Try-Catch 块
 ```tsx
 try {
-  
+
 } catch (error) {
   console.error('Error:', error)
-  
+
 }
 ```
 

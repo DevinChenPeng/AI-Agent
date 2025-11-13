@@ -14,17 +14,21 @@ const lazyLoad = (
     <Component />
   </Suspense>
 )
-
+type RouteConfig = RouteObject & {
+  name?: string
+}
 /**
  * 路由配置
  */
-const routes: RouteObject[] = [
+const routes: RouteConfig[] = [
   {
     path: '/',
+    name: '新对话',
     element: lazyLoad(Home)
   },
   {
-    path: '/list',
+    path: '/write',
+    name: 'AI 文档',
     element: lazyLoad(List)
   },
   {
