@@ -1,0 +1,90 @@
+/**
+ * 工具类集合
+ * 包含光标、用户选择、指针事件、Z-index等其他工具类
+ */
+
+/* ==================== 光标 ==================== */
+.cursor-auto { cursor: auto; }
+.cursor-default { cursor: default; }
+.cursor-pointer { cursor: pointer; }
+.cursor-wait { cursor: wait; }
+.cursor-text { cursor: text; }
+.cursor-move { cursor: move; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+/* ==================== 用户选择 ==================== */
+.select-none {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.select-text {
+  -webkit-user-select: text;
+  user-select: text;
+}
+.select-all {
+  -webkit-user-select: all;
+  user-select: all;
+}
+.select-auto {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* ==================== 指针事件 ==================== */
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+
+/* ==================== Z-index ==================== */
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+.z-dropdown { z-index: var(--z-dropdown); }
+.z-sticky { z-index: var(--z-sticky); }
+.z-modal { z-index: var(--z-modal); }
+.z-tooltip { z-index: var(--z-tooltip); }
+
+/* ==================== 无障碍辅助 ==================== */
+/* 仅为屏幕阅读器显示 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* 焦点可见样式 */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ==================== 打印样式 ==================== */
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ==================== 性能优化 ==================== */
+/* GPU加速 */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 平滑滚动 */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
