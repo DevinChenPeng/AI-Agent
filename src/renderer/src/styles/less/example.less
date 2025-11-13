@@ -191,8 +191,8 @@
   // 循环生成栅格列
   .generate-columns(@n, @i: 1) when (@i =< @n) {
     .example-col-@{i} {
-      flex: 0 0 percentage(@i / @n);
-      max-width: percentage(@i / @n);
+      flex: 0 0 percentage((@i / @n));
+      max-width: percentage((@i / @n));
     }
     .generate-columns(@n, (@i + 1));
   }

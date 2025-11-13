@@ -1,0 +1,207 @@
+{
+  "React Function Component": {
+    "prefix": "rfc",
+    "body": [
+      "import { FC } from 'react'",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "const ${1:ComponentName}: FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "  return (",
+      "    <div className=\"${4:container}\">",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:ComponentName}",
+      ""
+    ],
+    "description": "创建 React 函数组件（带 Props 接口）"
+  },
+  "React Function Component Without Props": {
+    "prefix": "rfcn",
+    "body": [
+      "import { FC } from 'react'",
+      "",
+      "const ${1:ComponentName}: FC = () => {",
+      "  return (",
+      "    <div className=\"${2:container}\">",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:ComponentName}",
+      ""
+    ],
+    "description": "创建 React 函数组件（无 Props）"
+  },
+  "React Function Component with useState": {
+    "prefix": "rfcs",
+    "body": [
+      "import { FC, useState } from 'react'",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "const ${1:ComponentName}: FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "  const [${4:state}, set${4/(.*)/${1:/capitalize}/}] = useState$5($6)",
+      "",
+      "  return (",
+      "    <div className=\"${7:container}\">",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:ComponentName}",
+      ""
+    ],
+    "description": "创建带 useState 的 React 函数组件"
+  },
+  "React Function Component with useEffect": {
+    "prefix": "rfce",
+    "body": [
+      "import { FC, useEffect } from 'react'",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "const ${1:ComponentName}: FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "  useEffect(() => {",
+      "    $4",
+      "  }, [$5])",
+      "",
+      "  return (",
+      "    <div className=\"${6:container}\">",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:ComponentName}",
+      ""
+    ],
+    "description": "创建带 useEffect 的 React 函数组件"
+  },
+  "React Arrow Function Component": {
+    "prefix": "rafc",
+    "body": [
+      "import { FC } from 'react'",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "export const ${1:ComponentName}: FC<${1:ComponentName}Props> = ({ $3 }) => {",
+      "  return (",
+      "    <div className=\"${4:container}\">",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      ""
+    ],
+    "description": "创建导出的箭头函数组件"
+  },
+  "useState Hook": {
+    "prefix": "ush",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState$2($3)"
+    ],
+    "description": "useState Hook"
+  },
+  "useEffect Hook": {
+    "prefix": "ueh",
+    "body": [
+      "useEffect(() => {",
+      "  $1",
+      "}, [$2])"
+    ],
+    "description": "useEffect Hook"
+  },
+  "useCallback Hook": {
+    "prefix": "ucb",
+    "body": [
+      "const ${1:memoizedCallback} = useCallback(",
+      "  ($2) => {",
+      "    $3",
+      "  },",
+      "  [$4]",
+      ")"
+    ],
+    "description": "useCallback Hook"
+  },
+  "useMemo Hook": {
+    "prefix": "umm",
+    "body": [
+      "const ${1:memoizedValue} = useMemo(() => {",
+      "  return $2",
+      "}, [$3])"
+    ],
+    "description": "useMemo Hook"
+  },
+  "useRef Hook": {
+    "prefix": "urf",
+    "body": [
+      "const ${1:ref} = useRef$2($3)"
+    ],
+    "description": "useRef Hook"
+  },
+  "TypeScript Interface": {
+    "prefix": "tsi",
+    "body": [
+      "interface ${1:InterfaceName} {",
+      "  $0",
+      "}"
+    ],
+    "description": "TypeScript 接口"
+  },
+  "TypeScript Type": {
+    "prefix": "tst",
+    "body": [
+      "type ${1:TypeName} = {",
+      "  $0",
+      "}"
+    ],
+    "description": "TypeScript 类型别名"
+  },
+  "Import CSS Module": {
+    "prefix": "imcss",
+    "body": [
+      "import styles from './${1:ComponentName}.css'"
+    ],
+    "description": "导入 CSS 模块"
+  },
+  "Import Less Module": {
+    "prefix": "imless",
+    "body": [
+      "import styles from './${1:ComponentName}.less'"
+    ],
+    "description": "导入 Less 模块"
+  },
+  "Console Log": {
+    "prefix": "clg",
+    "body": [
+      "console.log('${1:label}:', $2)"
+    ],
+    "description": "Console.log"
+  },
+  "Try Catch": {
+    "prefix": "tryc",
+    "body": [
+      "try {",
+      "  $1",
+      "} catch (error) {",
+      "  console.error('${2:Error}:', error)",
+      "  $3",
+      "}"
+    ],
+    "description": "Try-Catch 块"
+  }
+}

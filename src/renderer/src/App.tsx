@@ -1,11 +1,15 @@
-// 导入LessExample
-import LessExample from './components/LessExample'
+import { HashRouter as Router, useRoutes } from 'react-router-dom'
+import routes from './routes'
+
+function AppRoutes(): React.JSX.Element | null {
+  return useRoutes(routes)
+}
+
 function App(): React.JSX.Element {
   return (
-    <>
-      <h1>Hello World!</h1>
-      <LessExample />
-    </>
+    <Router>
+      <AppRoutes />
+    </Router>
   )
 }
 
