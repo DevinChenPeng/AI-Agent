@@ -1,5 +1,7 @@
 // 导入全局样式
-import './styles/index.css'
+import './styles/css/index.css'
+// 导入 Less 示例样式
+import './styles/less/example.less'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

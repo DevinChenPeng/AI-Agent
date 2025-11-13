@@ -15,6 +15,18 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [react()]
+    plugins: [react()],
+    css: {
+      preprocessorOptions: {
+        less: {
+          // Less 配置选项
+          javascriptEnabled: true
+          // 可以添加全局变量
+          // modifyVars: {
+          //   'primary-color': '#1890ff'
+          // }
+        }
+      }
+    }
   }
 })

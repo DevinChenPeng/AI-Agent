@@ -10,9 +10,15 @@
   transition-duration: var(--transition-base);
 }
 
-.transition-fast { transition-duration: var(--transition-fast); }
-.transition-base { transition-duration: var(--transition-base); }
-.transition-slow { transition-duration: var(--transition-slow); }
+.transition-fast {
+  transition-duration: var(--transition-fast);
+}
+.transition-base {
+  transition-duration: var(--transition-base);
+}
+.transition-slow {
+  transition-duration: var(--transition-slow);
+}
 
 .transition-colors {
   transition-property: color, background-color, border-color;
@@ -34,13 +40,21 @@
 
 /* ==================== 关键帧动画定义 ==================== */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slideInUp {
@@ -99,17 +113,27 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -118,13 +142,33 @@
 }
 
 /* ==================== 动画类 ==================== */
-.animate-fade-in { animation: fadeIn var(--transition-base) var(--transition-timing); }
-.animate-fade-out { animation: fadeOut var(--transition-base) var(--transition-timing); }
-.animate-slide-in-up { animation: slideInUp var(--transition-base) var(--transition-timing); }
-.animate-slide-in-down { animation: slideInDown var(--transition-base) var(--transition-timing); }
-.animate-slide-in-left { animation: slideInLeft var(--transition-base) var(--transition-timing); }
-.animate-slide-in-right { animation: slideInRight var(--transition-base) var(--transition-timing); }
-.animate-zoom-in { animation: zoomIn var(--transition-base) var(--transition-timing); }
-.animate-spin { animation: spin 1s linear infinite; }
-.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-.animate-bounce { animation: bounce 1s infinite; }
+.animate-fade-in {
+  animation: fadeIn var(--transition-base) var(--transition-timing);
+}
+.animate-fade-out {
+  animation: fadeOut var(--transition-base) var(--transition-timing);
+}
+.animate-slide-in-up {
+  animation: slideInUp var(--transition-base) var(--transition-timing);
+}
+.animate-slide-in-down {
+  animation: slideInDown var(--transition-base) var(--transition-timing);
+}
+.animate-slide-in-left {
+  animation: slideInLeft var(--transition-base) var(--transition-timing);
+}
+.animate-slide-in-right {
+  animation: slideInRight var(--transition-base) var(--transition-timing);
+}
+.animate-zoom-in {
+  animation: zoomIn var(--transition-base) var(--transition-timing);
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-bounce {
+  animation: bounce 1s infinite;
+}

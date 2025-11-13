@@ -1,0 +1,347 @@
+/**
+ * LessExample 组件样式
+ * 演示 Less 的实际应用
+ */
+
+// ==================== 变量定义 ====================
+@primary-color: #1890ff;
+@success-color: #52c41a;
+@warning-color: #faad14;
+@error-color: #f5222d;
+@text-color: #333;
+@border-color: #d9d9d9;
+@bg-color: #f5f5f5;
+
+@spacing: 16px;
+@border-radius: 8px;
+@transition-time: 0.3s;
+
+// ==================== 混合 ====================
+.flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-shadow() {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all @transition-time ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+}
+
+// ==================== 主容器 ====================
+.less-demo-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: @spacing * 2;
+
+  .less-demo-header {
+    text-align: center;
+    margin-bottom: @spacing * 3;
+
+    h1 {
+      font-size: 32px;
+      color: @primary-color;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .less-demo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h3 {
+      margin-bottom: @spacing;
+      color: @text-color;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    > div {
+      margin-bottom: @spacing * 2;
+    }
+  }
+}
+
+// ==================== 卡片样式 ====================
+.demo-card {
+  background: white;
+  border-radius: @border-radius * 1.5;
+  overflow: hidden;
+  .card-shadow();
+
+  &-header {
+    padding: @spacing;
+    background: linear-gradient(135deg, @primary-color 0%, lighten(@primary-color, 10%) 100%);
+    color: white;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+
+  &-body {
+    padding: @spacing * 1.5;
+
+    p {
+      margin: @spacing / 2 0;
+      line-height: 1.6;
+      color: #666;
+    }
+  }
+
+  &-footer {
+    padding: @spacing;
+    border-top: 1px solid @border-color;
+    text-align: right;
+  }
+}
+
+// ==================== 按钮样式 ====================
+.demo-button {
+  padding: @spacing / 2 @spacing * 1.5;
+  font-size: 14px;
+  border: none;
+  border-radius: @border-radius / 2;
+  cursor: pointer;
+  transition: all @transition-time ease;
+  font-weight: 500;
+  outline: none;
+
+  // 默认样式
+  background: @primary-color;
+  color: white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: #d9d9d9;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // 变体样式
+  &.primary {
+    background: @primary-color;
+    &:hover:not(:disabled) {
+      background: darken(@primary-color, 8%);
+    }
+  }
+
+  &.success {
+    background: @success-color;
+    &:hover:not(:disabled) {
+      background: darken(@success-color, 8%);
+    }
+  }
+
+  &.warning {
+    background: @warning-color;
+    &:hover:not(:disabled) {
+      background: darken(@warning-color, 8%);
+    }
+  }
+
+  &.error {
+    background: @error-color;
+    &:hover:not(:disabled) {
+      background: darken(@error-color, 8%);
+    }
+  }
+}
+
+// ==================== 按钮组 ====================
+.demo-button-group {
+  background: white;
+  padding: @spacing * 1.5;
+  border-radius: @border-radius;
+  .card-shadow();
+
+  .button-row {
+    display: flex;
+    gap: @spacing;
+    flex-wrap: wrap;
+  }
+}
+
+// ==================== 计数器 ====================
+.demo-counter {
+  background: white;
+  padding: @spacing * 1.5;
+  border-radius: @border-radius;
+  .card-shadow();
+
+  .counter-display {
+    .flex-center();
+    padding: @spacing * 2;
+    margin-bottom: @spacing;
+    background: @bg-color;
+    border-radius: @border-radius / 2;
+
+    .counter-label {
+      font-size: 18px;
+      color: @text-color;
+      margin-right: @spacing;
+    }
+
+    .counter-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: @primary-color;
+      min-width: 60px;
+      text-align: center;
+    }
+  }
+
+  .counter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: @spacing;
+  }
+}
+
+// ==================== 栅格系统 ====================
+.demo-grid {
+  background: white;
+  padding: @spacing * 1.5;
+  border-radius: @border-radius;
+  .card-shadow();
+}
+
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -(@spacing / 2);
+  margin-bottom: @spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.demo-col {
+  padding: 0 (@spacing / 2);
+
+  .grid-item {
+    background: linear-gradient(135deg, @primary-color 0%, lighten(@primary-color, 15%) 100%);
+    color: white;
+    padding: @spacing;
+    border-radius: @border-radius / 2;
+    text-align: center;
+    font-weight: 600;
+    transition: all @transition-time ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+    }
+  }
+}
+
+// 生成栅格列
+.generate-columns(@n, @i: 1) when (@i =< @n) {
+  .demo-col-@{i} {
+    flex: 0 0 percentage(@i / @n);
+    max-width: percentage(@i / @n);
+  }
+  .generate-columns(@n, (@i + 1));
+}
+
+.generate-columns(12);
+
+// ==================== 颜色示例 ====================
+.demo-colors {
+  background: white;
+  padding: @spacing * 1.5;
+  border-radius: @border-radius;
+  .card-shadow();
+
+  .color-row {
+    display: flex;
+    gap: @spacing;
+    flex-wrap: wrap;
+  }
+
+  .color-box {
+    flex: 1;
+    min-width: 150px;
+    padding: @spacing * 2;
+    border-radius: @border-radius / 2;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all @transition-time ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .primary-bg {
+    background: @primary-color;
+  }
+
+  .success-bg {
+    background: @success-color;
+  }
+
+  .warning-bg {
+    background: @warning-color;
+  }
+
+  .error-bg {
+    background: @error-color;
+  }
+}
+
+// ==================== 响应式设计 ====================
+@media (max-width: 768px) {
+  .less-demo-container {
+    padding: @spacing;
+
+    .less-demo-header h1 {
+      font-size: 24px;
+    }
+
+    .demo-button-group .button-row {
+      flex-direction: column;
+
+      .demo-button {
+        width: 100%;
+      }
+    }
+
+    .demo-counter .counter-buttons {
+      flex-direction: column;
+
+      .demo-button {
+        width: 100%;
+      }
+    }
+
+    .demo-colors .color-row {
+      flex-direction: column;
+
+      .color-box {
+        width: 100%;
+      }
+    }
+  }
+}
