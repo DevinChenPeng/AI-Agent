@@ -1,0 +1,490 @@
+{
+  "css: flex": {
+    "prefix": "f",
+    "body": ["flex"],
+    "description": "布局: display:flex"
+  },
+  "css: flex-row": {
+    "prefix": "fr",
+    "body": ["flex-row"],
+    "description": "布局: flex-direction: row"
+  },
+  "css: flex-col": {
+    "prefix": "fc2",
+    "body": ["flex-col"],
+    "description": "布局: flex-direction: column"
+  },
+  "css: flex-wrap": {
+    "prefix": "fw",
+    "body": ["flex-wrap"],
+    "description": "布局: flex-wrap: wrap"
+  },
+  "css: flex-nowrap": {
+    "prefix": "fn",
+    "body": ["flex-nowrap"],
+    "description": "布局: flex-wrap: nowrap"
+  },
+  "css: flex-1": {
+    "prefix": "f1",
+    "body": ["flex-1"],
+    "description": "布局: flex: 1"
+  },
+  "css: flex-auto": {
+    "prefix": "fa",
+    "body": ["flex-auto"],
+    "description": "布局: flex: auto"
+  },
+  "css: flex-initial": {
+    "prefix": "fi",
+    "body": ["flex-initial"],
+    "description": "布局: flex: initial"
+  },
+  "css: flex-none": {
+    "prefix": "fn2",
+    "body": ["flex-none"],
+    "description": "布局: flex: none"
+  },
+
+  "css: justify-start": {
+    "prefix": "js",
+    "body": ["justify-start"],
+    "description": "对齐: justify-content:flex-start"
+  },
+  "css: justify-end": {
+    "prefix": "je",
+    "body": ["justify-end"],
+    "description": "对齐: justify-content:flex-end"
+  },
+  "css: justify-center": {
+    "prefix": "jc",
+    "body": ["justify-center"],
+    "description": "对齐: justify-content:center"
+  },
+  "css: justify-between": {
+    "prefix": "jb",
+    "body": ["justify-between"],
+    "description": "对齐: space-between"
+  },
+  "css: justify-around": {
+    "prefix": "ja",
+    "body": ["justify-around"],
+    "description": "对齐: space-around"
+  },
+  "css: justify-evenly": {
+    "prefix": "je2",
+    "body": ["justify-evenly"],
+    "description": "对齐: space-evenly"
+  },
+
+  "css: items-start": {
+    "prefix": "is",
+    "body": ["items-start"],
+    "description": "对齐: align-items:flex-start"
+  },
+  "css: items-end": {
+    "prefix": "ie",
+    "body": ["items-end"],
+    "description": "对齐: align-items:flex-end"
+  },
+  "css: items-center": {
+    "prefix": "ic",
+    "body": ["items-center"],
+    "description": "对齐: align-items:center"
+  },
+  "css: items-baseline": {
+    "prefix": "ib",
+    "body": ["items-baseline"],
+    "description": "对齐: align-items:baseline"
+  },
+  "css: items-stretch": {
+    "prefix": "is2",
+    "body": ["items-stretch"],
+    "description": "对齐: align-items:stretch"
+  },
+
+  "css: content-start": {
+    "prefix": "cs",
+    "body": ["content-start"],
+    "description": "对齐: align-content:flex-start"
+  },
+  "css: content-end": {
+    "prefix": "ce",
+    "body": ["content-end"],
+    "description": "对齐: align-content:flex-end"
+  },
+  "css: content-center": {
+    "prefix": "cc",
+    "body": ["content-center"],
+    "description": "对齐: align-content:center"
+  },
+  "css: content-between": {
+    "prefix": "cb",
+    "body": ["content-between"],
+    "description": "对齐: space-between"
+  },
+  "css: content-around": {
+    "prefix": "ca",
+    "body": ["content-around"],
+    "description": "对齐: space-around"
+  },
+
+  "css: grid": {
+    "prefix": "g",
+    "body": ["grid"],
+    "description": "Grid: display:grid"
+  },
+  "css: grid-cols-1": {
+    "prefix": "gc1",
+    "body": ["grid-cols-1"],
+    "description": "Grid: 1列"
+  },
+  "css: grid-cols-2": {
+    "prefix": "gc2",
+    "body": ["grid-cols-2"],
+    "description": "Grid: 2列"
+  },
+  "css: grid-cols-3": {
+    "prefix": "gc3",
+    "body": ["grid-cols-3"],
+    "description": "Grid: 3列"
+  },
+  "css: grid-cols-4": {
+    "prefix": "gc4",
+    "body": ["grid-cols-4"],
+    "description": "Grid: 4列"
+  },
+  "css: grid-cols-5": {
+    "prefix": "gc5",
+    "body": ["grid-cols-5"],
+    "description": "Grid: 5列"
+  },
+  "css: grid-cols-6": {
+    "prefix": "gc6",
+    "body": ["grid-cols-6"],
+    "description": "Grid: 6列"
+  },
+
+  "css: gap-xs": {
+    "prefix": "gxs",
+    "body": ["gap-xs"],
+    "description": "间距: gap XS"
+  },
+  "css: gap-sm": {
+    "prefix": "gsm",
+    "body": ["gap-sm"],
+    "description": "间距: gap SM"
+  },
+  "css: gap-md": {
+    "prefix": "gmd",
+    "body": ["gap-md"],
+    "description": "间距: gap MD"
+  },
+  "css: gap-lg": {
+    "prefix": "glg",
+    "body": ["gap-lg"],
+    "description": "间距: gap LG"
+  },
+  "css: gap-xl": {
+    "prefix": "gxl",
+    "body": ["gap-xl"],
+    "description": "间距: gap XL"
+  },
+  "css: gap-2xl": {
+    "prefix": "g2xl",
+    "body": ["gap-2xl"],
+    "description": "间距: gap 2XL"
+  },
+  "css: gap-3xl": {
+    "prefix": "g3xl",
+    "body": ["gap-3xl"],
+    "description": "间距: gap 3XL"
+  },
+
+  "css: relative": {
+    "prefix": "r",
+    "body": ["relative"],
+    "description": "定位: position:relative"
+  },
+  "css: absolute": {
+    "prefix": "a",
+    "body": ["absolute"],
+    "description": "定位: position:absolute"
+  },
+  "css: fixed": {
+    "prefix": "f2",
+    "body": ["fixed"],
+    "description": "定位: position:fixed"
+  },
+  "css: sticky": {
+    "prefix": "s",
+    "body": ["sticky"],
+    "description": "定位: position:sticky"
+  },
+  "css: static": {
+    "prefix": "s2",
+    "body": ["static"],
+    "description": "定位: position:static"
+  },
+
+  "css: inset-0": {
+    "prefix": "i0",
+    "body": ["inset-0"],
+    "description": "定位: top/right/bottom/left:0"
+  },
+  "css: top-0": {
+    "prefix": "t0",
+    "body": ["top-0"],
+    "description": "定位: top:0"
+  },
+  "css: right-0": {
+    "prefix": "r0",
+    "body": ["right-0"],
+    "description": "定位: right:0"
+  },
+  "css: bottom-0": {
+    "prefix": "b0",
+    "body": ["bottom-0"],
+    "description": "定位: bottom:0"
+  },
+  "css: left-0": {
+    "prefix": "l0",
+    "body": ["left-0"],
+    "description": "定位: left:0"
+  },
+
+  "css: block": {
+    "prefix": "b",
+    "body": ["block"],
+    "description": "显示: display:block"
+  },
+  "css: inline-block": {
+    "prefix": "ib2",
+    "body": ["inline-block"],
+    "description": "显示: display:inline-block"
+  },
+  "css: inline": {
+    "prefix": "i",
+    "body": ["inline"],
+    "description": "显示: display:inline"
+  },
+  "css: hidden": {
+    "prefix": "h",
+    "body": ["hidden"],
+    "description": "显示: display:none"
+  },
+
+  "css: visible": {
+    "prefix": "v",
+    "body": ["visible"],
+    "description": "可见性: visible"
+  },
+  "css: invisible": {
+    "prefix": "i2",
+    "body": ["invisible"],
+    "description": "可见性: hidden"
+  },
+
+  "css: overflow-auto": {
+    "prefix": "oa",
+    "body": ["overflow-auto"],
+    "description": "滚动: overflow:auto"
+  },
+  "css: overflow-hidden": {
+    "prefix": "oh",
+    "body": ["overflow-hidden"],
+    "description": "滚动: overflow:hidden"
+  },
+  "css: overflow-visible": {
+    "prefix": "ov",
+    "body": ["overflow-visible"],
+    "description": "滚动: overflow:visible"
+  },
+  "css: overflow-scroll": {
+    "prefix": "os",
+    "body": ["overflow-scroll"],
+    "description": "滚动: overflow:scroll"
+  },
+  "css: overflow-x-auto": {
+    "prefix": "oxa",
+    "body": ["overflow-x-auto"],
+    "description": "滚动: overflow-x:auto"
+  },
+  "css: overflow-y-auto": {
+    "prefix": "oya",
+    "body": ["overflow-y-auto"],
+    "description": "滚动: overflow-y:auto"
+  },
+
+  "css: fc": {
+    "prefix": "fc",
+    "body": ["fc"],
+    "description": "快捷: Flex 居中 (横向)"
+  },
+  "css: fcc": {
+    "prefix": "fcc",
+    "body": ["fcc"],
+    "description": "快捷: Flex 水平垂直居中"
+  },
+  "css: flc": {
+    "prefix": "flc",
+    "body": ["flc"],
+    "description": "快捷: Flex 列 + 水平居中"
+  },
+  "css: flcc": {
+    "prefix": "flcc",
+    "body": ["flcc"],
+    "description": "快捷: Flex 列 + 水平垂直居中"
+  },
+
+  "css: container": {
+    "prefix": "c",
+    "body": ["container"],
+    "description": "响应式容器"
+  },
+
+  "css: cursor-auto": {
+    "prefix": "ca2",
+    "body": ["cursor-auto"],
+    "description": "光标: auto"
+  },
+  "css: cursor-default": {
+    "prefix": "cd",
+    "body": ["cursor-default"],
+    "description": "光标: default"
+  },
+  "css: cursor-pointer": {
+    "prefix": "cp",
+    "body": ["cursor-pointer"],
+    "description": "光标: pointer"
+  },
+  "css: cursor-wait": {
+    "prefix": "cw",
+    "body": ["cursor-wait"],
+    "description": "光标: wait"
+  },
+  "css: cursor-text": {
+    "prefix": "ct",
+    "body": ["cursor-text"],
+    "description": "光标: text"
+  },
+  "css: cursor-move": {
+    "prefix": "cm",
+    "body": ["cursor-move"],
+    "description": "光标: move"
+  },
+  "css: cursor-not-allowed": {
+    "prefix": "cna",
+    "body": ["cursor-not-allowed"],
+    "description": "光标: not-allowed"
+  },
+
+  "css: select-none": {
+    "prefix": "sn",
+    "body": ["select-none"],
+    "description": "选择: user-select:none"
+  },
+  "css: select-text": {
+    "prefix": "st",
+    "body": ["select-text"],
+    "description": "选择: user-select:text"
+  },
+  "css: select-all": {
+    "prefix": "sa",
+    "body": ["select-all"],
+    "description": "选择: user-select:all"
+  },
+  "css: select-auto": {
+    "prefix": "sa2",
+    "body": ["select-auto"],
+    "description": "选择: user-select:auto"
+  },
+
+  "css: pointer-events-none": {
+    "prefix": "pen",
+    "body": ["pointer-events-none"],
+    "description": "指针事件: none"
+  },
+  "css: pointer-events-auto": {
+    "prefix": "pea",
+    "body": ["pointer-events-auto"],
+    "description": "指针事件: auto"
+  },
+
+  "css: z-0": {
+    "prefix": "z0",
+    "body": ["z-0"],
+    "description": "Z-index: 0"
+  },
+  "css: z-10": {
+    "prefix": "z10",
+    "body": ["z-10"],
+    "description": "Z-index: 10"
+  },
+  "css: z-20": {
+    "prefix": "z20",
+    "body": ["z-20"],
+    "description": "Z-index: 20"
+  },
+  "css: z-30": {
+    "prefix": "z30",
+    "body": ["z-30"],
+    "description": "Z-index: 30"
+  },
+  "css: z-40": {
+    "prefix": "z40",
+    "body": ["z-40"],
+    "description": "Z-index: 40"
+  },
+  "css: z-50": {
+    "prefix": "z50",
+    "body": ["z-50"],
+    "description": "Z-index: 50"
+  },
+  "css: z-dropdown": {
+    "prefix": "zd",
+    "body": ["z-dropdown"],
+    "description": "Z-index: 下拉层级"
+  },
+  "css: z-sticky": {
+    "prefix": "zs",
+    "body": ["z-sticky"],
+    "description": "Z-index: 粘性层级"
+  },
+  "css: z-modal": {
+    "prefix": "zm",
+    "body": ["z-modal"],
+    "description": "Z-index: 模态层级"
+  },
+  "css: z-tooltip": {
+    "prefix": "zt",
+    "body": ["z-tooltip"],
+    "description": "Z-index: 提示层级"
+  },
+
+  "css: sr-only": {
+    "prefix": "so",
+    "body": ["sr-only"],
+    "description": "无障碍: 仅屏幕阅读器"
+  },
+  "css: focus-visible": {
+    "prefix": "fv",
+    "body": ["focus-visible"],
+    "description": "焦点可见样式触发类"
+  },
+  "css: no-print": {
+    "prefix": "np",
+    "body": ["no-print"],
+    "description": "打印: 不打印该元素"
+  },
+
+  "css: gpu-accelerated": {
+    "prefix": "ga",
+    "body": ["gpu-accelerated"],
+    "description": "性能: GPU 加速提示"
+  },
+  "css: smooth-scroll": {
+    "prefix": "ss",
+    "body": ["smooth-scroll"],
+    "description": "性能: 平滑滚动"
+  }
+}

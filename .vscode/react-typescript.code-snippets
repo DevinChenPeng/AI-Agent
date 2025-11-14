@@ -1,4 +1,11 @@
 {
+	 "React ClassName": {
+    "prefix": "rc",
+    "body": [
+      "className={styles['']}",
+    ],
+    "description": "创建 CSS 模块类名"
+  },
   "React Function Component": {
     "prefix": "rfc",
     "body": [

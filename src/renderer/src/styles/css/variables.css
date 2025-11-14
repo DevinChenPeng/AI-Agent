@@ -24,7 +24,7 @@
   --color-text-disabled: #bfbfbf;
 
   /* ==================== 背景色 ==================== */
-  --color-bg-primary: #ffffff;
+  --color-bg-primary: #fffefb;
   --color-bg-secondary: #fafafa;
   --color-bg-tertiary: #f5f5f5;
   --color-bg-disabled: #f5f5f5;
@@ -35,29 +35,32 @@
   --color-border-tertiary: #f0f0f0;
 
   /* ==================== 阴影 ==================== */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.16);
-  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.2);
+  /* 阴影尺寸由 px 转为 rem (1rem = 10px) */
+  --shadow-sm: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.08); /* 0 2px 4px */
+  --shadow-md: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.12); /* 0 4px 8px */
+  --shadow-lg: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.16); /* 0 8px 16px */
+  --shadow-xl: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.2); /* 0 12px 24px */
 
   /* ==================== 圆角 ==================== */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
+  /* 将圆角由 px 转为 rem，基于 1rem = 10px */
+  --radius-sm: 0.2rem; /* 2px */
+  --radius-md: 0.4rem; /* 4px */
+  --radius-lg: 0.8rem; /* 8px */
+  --radius-xl: 1.2rem; /* 12px */
+  --radius-2xl: 1.6rem; /* 16px */
   --radius-full: 9999px;
 
   /* ==================== 间距 ==================== */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  --spacing-3xl: 32px;
-  --spacing-4xl: 40px;
-  --spacing-5xl: 48px;
+  /* 基于 1rem = 10px 的换算，将原来的 px 改为 rem，便于整体缩放；如需调整，只需修改根字体大小 */
+  --spacing-xs: 0.4rem; /* 4px */
+  --spacing-sm: 0.8rem; /* 8px */
+  --spacing-md: 1.2rem; /* 12px */
+  --spacing-lg: 1.6rem; /* 16px */
+  --spacing-xl: 2rem; /* 20px */
+  --spacing-2xl: 2.4rem; /* 24px */
+  --spacing-3xl: 3.2rem; /* 32px */
+  --spacing-4xl: 4rem; /* 40px */
+  --spacing-5xl: 4.8rem; /* 48px */
 
   /* ==================== 字体大小 ==================== */
   --font-size-xs: 1.2rem;

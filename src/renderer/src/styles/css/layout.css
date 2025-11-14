@@ -207,6 +207,27 @@
   overflow-y: auto;
 }
 
+.fc {
+  display: flex;
+  justify-content: center;
+}
+.fcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flcc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ==================== 响应式容器 ==================== */
 .container {
   width: 100%;
