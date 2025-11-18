@@ -94,7 +94,6 @@ export class FetchEventStream {
     return new Promise<void>((resolve, reject) => {
       this._resolve = resolve
       this._reject = reject
-      this.dispose()
       this.create()
     })
   }

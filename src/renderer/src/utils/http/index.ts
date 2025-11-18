@@ -1,5 +1,11 @@
 import { HttpResponse } from '@renderer/types/common'
-import axios, { AxiosInstance, CreateAxiosDefaults, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios'
+import axios, {
+  AxiosInstance,
+  CreateAxiosDefaults,
+  InternalAxiosRequestConfig,
+  AxiosResponse,
+  AxiosRequestConfig
+} from 'axios'
 
 class Http {
   private instance: AxiosInstance

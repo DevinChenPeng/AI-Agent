@@ -13,7 +13,12 @@ const ComponentName: FC<ComponentNameProps> = () => {
     const to = String(route.path || '/')
     const end = to === '/'
     return (
-      <NavLink key={route.path} to={to} end={end} className={({ isActive }) => cn(layout_container_nav_item, 'fc', 'gap-sm', isActive && active)}>
+      <NavLink
+        key={route.path}
+        to={to}
+        end={end}
+        className={({ isActive }) => cn(layout_container_nav_item, 'fc', 'gap-sm', isActive && active)}
+      >
         {({ isActive }) => (
           <>
             {route.icon ? (

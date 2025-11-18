@@ -8,7 +8,9 @@ const AI = lazy(() => import('../pages/AI/index'))
 const RunMonitor = lazy(() => import('../pages/runMonitor/index'))
 
 // 路由懒加载包装器
-const lazyLoad = (Component: React.LazyExoticComponent<React.ComponentType<Record<string, never>>>): React.JSX.Element => (
+const lazyLoad = (
+  Component: React.LazyExoticComponent<React.ComponentType<Record<string, never>>>
+): React.JSX.Element => (
   <Suspense fallback={<Loading />}>
     <Component />
   </Suspense>

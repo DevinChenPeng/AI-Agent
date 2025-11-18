@@ -65,6 +65,8 @@ export class FetchEventSourceClient {
   /** 主动关闭连接（用于组件卸载/切换页面等情况的清理） */
   close(): void {
     try {
+      console.log(11112222)
+
       this._eventStream?.abort()
     } catch (e) {
       console.error('SSE close error:', e)

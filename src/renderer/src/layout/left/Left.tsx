@@ -4,13 +4,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { Avatar } from 'antd'
 import Nav from './Nav'
 import { cn } from '@renderer/utils/classNames'
-const {
-  layout_container_left,
-  layout_container_avatar,
-  name,
-  subordinate_name,
-  layout_container_footer
-} = styles
+const { layout_container_left, layout_container_avatar, name, subordinate_name, layout_container_footer } = styles
 interface ComponentNameProps {}
 
 const ComponentName: FC<ComponentNameProps> = () => {

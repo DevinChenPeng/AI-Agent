@@ -34,12 +34,5 @@
 		"out",
 		"build"
 	],
-	"cssvar.enable": true,
-	// 显示 150 列参考线，帮助保持与 Prettier 行宽一致
-	"editor.rulers": [150],
-	// 让编辑器与 Prettier 的 printWidth 保持一致（仅作提示，不会覆盖项目配置文件）
-	"prettier.printWidth": 150,
-	// 关闭软换行（可按需改为 "bounded"/"wordWrapColumn"）
-	"editor.wordWrap": "off",
-	"editor.wordWrapColumn": 150
+	"cssvar.enable": true
 }

@@ -1,12 +1,5 @@
 // utils/classNames.ts
-export type ClassValue =
-  | string
-  | number
-  | null
-  | undefined
-  | false
-  | ClassValue[]
-  | Record<string, boolean>
+export type ClassValue = string | number | null | undefined | false | ClassValue[] | Record<string, boolean>
 
 export function cn(...values: ClassValue[]): string {
   const result: string[] = []

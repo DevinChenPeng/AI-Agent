@@ -8,7 +8,6 @@
 
 ```tsx
 import { DynamicIcon } from '@renderer/components/DynamicIcon'
-
 ;<DynamicIcon name="openai" size="1.6rem" color="var(--color-text-primary)" />
 ```
 

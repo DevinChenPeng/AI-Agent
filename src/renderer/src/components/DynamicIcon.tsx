@@ -46,7 +46,13 @@ export interface BaseIconProps {
 }
 
 // 推荐：白名单动态图标（更小的打包体积）
-export function DynamicIcon({ name, size, color, style, ...rest }: BaseIconProps & { name: IconName }): React.ReactElement | null {
+export function DynamicIcon({
+  name,
+  size,
+  color,
+  style,
+  ...rest
+}: BaseIconProps & { name: IconName }): React.ReactElement | null {
   const C = iconMap[name]
   if (!C) return null
   const merged: CSSProperties = {
@@ -61,7 +67,13 @@ export function DynamicIcon({ name, size, color, style, ...rest }: BaseIconProps
 type AnyIcon = React.ComponentType<{ style?: CSSProperties } & Record<string, unknown>>
 const IconsRecord = AllIcons as unknown as Record<string, AnyIcon>
 
-export function LooseIcon({ name, size, color, style, ...rest }: BaseIconProps & { name: string }): React.ReactElement | null {
+export function LooseIcon({
+  name,
+  size,
+  color,
+  style,
+  ...rest
+}: BaseIconProps & { name: string }): React.ReactElement | null {
   const C = IconsRecord[name]
   if (!C) return null
   const merged: CSSProperties = {

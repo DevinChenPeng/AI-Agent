@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
 import { FetchEventSourceClient } from '@renderer/utils/FetchEventSourceClient'
+import { useMount } from '@renderer/hooks/useMount'
 
 export const useBaseHooks = (): void => {
-  useEffect(() => {
+  useMount(() => {
     const url = 'https://qa-tyxk.meosedge.com/meos-control-server-edge/server-event/sse/subscribe?PAGE_BROADCAST'
-    const client = new FetchEventSourceClient(url, {
+    new FetchEventSourceClient(url, {
       method: 'POST',
       data: [
         {
@@ -29,11 +29,5 @@ export const useBaseHooks = (): void => {
           'eyJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VUeXBlIjoxLCJhdWQiOiJ5dXNodS1zYWFzLWNsaWVudCIsInN1YiI6Inl1c2h1LXVzZXIiLCJhY2NvdW50SWQiOiIxNTA5ODMyMjM3NjE3MTgwNjc0IiwiYWNjb3VudE5hbWUiOiIxODA4ODg4ODEwMCIsImFjY291bnRUeXBlIjoiMiIsImlzcyI6Inl1c2h1IiwianRpIjoiNTMyNjY5MDMtNWQ2Zi00MDUyLWJmNzYtMzQ2YTI2YTUzOTExIn0.wM1XXhdqjFxvkIu6xCEnlcINfzkvSEtEtLKlQtmdoKY'
       }
     })
-    console.log(1111222)
-
-    // StrictMode 开发下会发生“挂载→卸载→再挂载”，清理函数可避免连接叠加
-    return () => {
-      // client.close()
-    }
-  }, [])
+  })
 }

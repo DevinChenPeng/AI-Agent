@@ -16,8 +16,7 @@ const antdTheme: ThemeConfig = {
     colorTextBase: getCSSVariable('--color-text-primary') || '#262626',
     colorBgBase: getCSSVariable('--color-bg-primary') || '#ffffff',
     borderRadius: 4,
-    fontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
   }
 }
 
