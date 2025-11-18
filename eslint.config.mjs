@@ -26,6 +26,10 @@ export default defineConfig(
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...eslintPluginReactRefresh.configs.vite.rules,
+      // 允许将 `void fn()` 作为语句，用于显式忽略 Promise 的结果等场景
+      'no-void': ['warn', { allowAsStatement: true }],
+      // 避免在使用 `void` 时误报混淆（比如在表达式位置），如确有需要可改为 'warn' 或 'off'
+      '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {

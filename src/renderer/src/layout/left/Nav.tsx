@@ -6,7 +6,7 @@ interface ComponentNameProps {}
 const { layout_container_nav } = styles
 const ComponentName: FC<ComponentNameProps> = () => {
   return (
-    <nav className={cn(layout_container_nav)}>
+    <nav className={cn(layout_container_nav, 'gap-2xl')}>
       <MenuTemps />
     </nav>
   )

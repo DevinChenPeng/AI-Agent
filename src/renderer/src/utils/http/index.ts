@@ -1,11 +1,5 @@
-import { BaseResponse, HttpResponse } from '@renderer/types/common'
-import axios, {
-  AxiosInstance,
-  CreateAxiosDefaults,
-  InternalAxiosRequestConfig,
-  AxiosResponse,
-  AxiosRequestConfig
-} from 'axios'
+import { HttpResponse } from '@renderer/types/common'
+import axios, { AxiosInstance, CreateAxiosDefaults, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios'
 
 class Http {
   private instance: AxiosInstance
@@ -62,10 +56,7 @@ const BASE_CONFIG: CreateAxiosDefaults = {
         return JSON.stringify(data)
       }
       // 处理表单类型
-      if (
-        typeof contentType === 'string' &&
-        contentType.includes('application/x-www-form-urlencoded')
-      ) {
+      if (typeof contentType === 'string' && contentType.includes('application/x-www-form-urlencoded')) {
         const formData = new URLSearchParams()
         Object.entries(data).forEach(([k, v]) => formData.append(k, String(v)))
         return formData

@@ -29,8 +29,8 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Microsoft YaHei', '微软雅黑', sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    'Microsoft YaHei', '微软雅黑', sans-serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   color: var(--color-text-primary);
@@ -168,11 +168,13 @@ table {
   background: var(--color-text-tertiary);
 }
 
-/* Firefox滚动条 */
+/* Firefox滚动条（以下属性为可选增强，若造成构建告警，可保持注释状态） */
+/*
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-primary) var(--color-bg-secondary);
 }
+*/
 
 /* ==================== 选中文本样式 ==================== */
 ::selection {
