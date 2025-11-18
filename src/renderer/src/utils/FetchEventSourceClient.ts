@@ -1,4 +1,5 @@
 import { FetchEventStream, EventStreamContentType } from './fetch-event-stream'
+import { EventSourceMessage } from './fetch-event-stream/parse'
 
 export interface SSEOptions extends RequestInit {
   headers?: Record<string, string>
@@ -51,9 +52,16 @@ export class FetchEventSourceClient {
       onclose: () => {
         throw new RetriableError('SSE connection closed')
       },
-      onmessage: event => {
-        // 分发到事件监听器池（预留扩展点）
-        this._listenerMap.get('message')?.forEach(fn => fn(event))
+      onmessage: msg => {
+        const { event } = msg
+        if (event === 'FatalError') {
+          console.error('onmessage FatalError>>>>', msg.data)
+          throw new FatalError(msg.data)
+        }
+
+        if (event) {
+          this._triggerEvent(event, msg)
+        }
       },
       onerror: error => {
         console.error('SSE error:', error)
@@ -61,13 +69,39 @@ export class FetchEventSourceClient {
     })
     this._eventStream.start().catch(err => console.error('SSE start error:', err))
   }
+  _triggerEvent(eventName: string, data: EventSourceMessage): void {
+    try {
+      const listeners = this._listenerMap.get(eventName)
+      if (listeners) {
+        listeners.forEach(listener => {
+          listener(data)
+        })
+      }
+    } catch (err) {
+      console.error('triggerEvent error>>>', err)
+    }
+  }
+  addEventListener(eventName: string, listener: SSEListener): void {
+    if (!this._listenerMap.has(eventName)) {
+      this._listenerMap.set(eventName, [])
+    }
+    this._listenerMap.get(eventName)?.push(listener)
+  }
 
+  removeEventListener(eventName: string, listener: SSEListener): void {
+    if (this._listenerMap.has(eventName)) {
+      const listeners = this._listenerMap.get(eventName)
+      const index = listeners?.indexOf(listener)
+      if (index !== -1) {
+        listeners?.splice(index!, 1)
+      }
+    }
+  }
   /** 主动关闭连接（用于组件卸载/切换页面等情况的清理） */
   close(): void {
     try {
-      console.log(11112222)
-
       this._eventStream?.abort()
+      this._listenerMap.clear()
     } catch (e) {
       console.error('SSE close error:', e)
     }

@@ -1,4 +1,4 @@
-import { EventSourceMessage } from './parse'
+import { EventSourceMessage, getMessages, handleLines, parseEventStreamLineByLine } from './parse'
 
 /**
  * fetch-event-stream 模块
@@ -142,19 +142,22 @@ export class FetchEventStream {
         signal: this._curRequestController.signal
       })
       await onopen(response)
+      await parseEventStreamLineByLine(
+        response.body!,
+        handleLines(
+          getMessages(
+            id => {
+              console.log(id)
+            },
+            retry => {
+              this._retryInterval = retry
+            },
+            onmessage
+          )
+        )
+      )
       // 连接建立成功，通知调用方（仅首次或每次成功重连都可触发，这里选择每次 create 成功都触发）
       this._resolve?.()
-      // onclose?.()
-      // TODO: 解析 response.body 的流内容 -> 调用 this._options.onmessage
-      const reader = response.body?.getReader()
-      const res = await reader?.read()
-      console.log(res)
-      const decoder = new TextDecoder()
-      // console.log(reader)
-      // while (reader) {
-      //   console.log(reader)
-      //   onmessage?.(reader as any)
-      // }
     } catch (error) {
       const retryDelay = this.handleError(error)
       if (retryDelay != null && retryDelay >= 0 && !this._disposed) {
