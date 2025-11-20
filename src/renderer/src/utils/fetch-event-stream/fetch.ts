@@ -148,7 +148,7 @@ export class FetchEventStream {
         handleLines(
           getMessages(
             id => {
-              console.log(id)
+              // console.log(id)
             },
             retry => {
               this._retryInterval = retry

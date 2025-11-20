@@ -22,7 +22,7 @@ const ComponentName: FC<ComponentNameProps> = () => {
         {({ isActive }) => (
           <>
             {route.icon ? (
-              <div className={cn(layout_container_nav_icon, isActive && active)}>
+              <div className={cn(layout_container_nav_icon, isActive && active, 'fcc')}>
                 <DynamicIcon
                   name={route.icon as IconName}
                   size="var(--font-size-4xl)"

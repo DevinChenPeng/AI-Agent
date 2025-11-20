@@ -13,7 +13,8 @@ import {
   MinusOutlined,
   CheckCircleFilled,
   CloseCircleFilled,
-  InfoCircleOutlined
+  InfoCircleOutlined,
+  DashboardOutlined
 } from '@ant-design/icons'
 import * as AllIcons from '@ant-design/icons'
 // 白名单映射：利于 Tree-shaking，按需打包
@@ -31,7 +32,8 @@ const iconMap = {
   minus: MinusOutlined,
   checkFilled: CheckCircleFilled,
   closeFilled: CloseCircleFilled,
-  info: InfoCircleOutlined
+  info: InfoCircleOutlined,
+  DashboardOutlined
 } as const
 
 export type IconName = keyof typeof iconMap

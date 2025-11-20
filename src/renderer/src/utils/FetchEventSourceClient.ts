@@ -21,7 +21,11 @@ class RetriableError extends Error {}
  */
 class FatalError extends Error {}
 
-export type SSEListenerParams = EventSourceMessage
+// 替换原有 SSEListenerParams 定义如下：
+
+export type SSEListenerParams = Omit<EventSourceMessage, 'data'> & {
+  data: Record<string, string> | string
+}
 
 // SSE事件监听器类型定义
 export type SSEListener = (event?: SSEListenerParams) => void
@@ -106,8 +110,14 @@ export class FetchEventSourceClient {
       }
     })
 
-    // 启动事件流并捕获启动错误
-    this._eventStream.start().catch(err => console.error('SSE start error:', err))
+    // 启动事件流并捕获启动错误；主动关闭（AbortError）时静默忽略
+    this._eventStream.start().catch(err => {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        return
+      }
+
+      console.error('FetchEventStream start error:', err)
+    })
   }
 
   /**
@@ -118,11 +128,8 @@ export class FetchEventSourceClient {
   _triggerEvent(eventName: string, data: EventSourceMessage): void {
     try {
       const listeners = this._listenerMap.get(eventName)
-      console.log(listeners)
       if (listeners) {
         listeners.forEach(listener => {
-          console.log(data)
-
           listener(data)
         })
       }
@@ -137,6 +144,8 @@ export class FetchEventSourceClient {
    * @param listener - 监听器回调函数
    */
   addEventListener(eventName: string, listener: SSEListener): void {
+    console.log(eventName)
+
     if (!this._listenerMap.has(eventName)) {
       this._listenerMap.set(eventName, [])
     }

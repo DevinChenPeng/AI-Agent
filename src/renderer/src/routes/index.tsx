@@ -32,7 +32,7 @@ const routes: RouteConfig[] = [
   {
     path: '/run-monitor',
     name: '运行监控',
-    icon: 'robot',
+    icon: 'DashboardOutlined',
     element: lazyLoad(RunMonitor)
   },
   {

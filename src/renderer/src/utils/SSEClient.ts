@@ -37,12 +37,12 @@ export default class SSEClient {
     this.options = SSEClient.setHeaders(options)
     this.url = SSEClient.setUrl(this.url, this.options)
   }
-  setOptions(options: SSEOptions = {}): void {
-    if (!this.isDestroy) {
-      this.close()
-      this.init(options)
-      this.connect()
-    }
+  setOptions(options: SSEOptions = {}, url?: string): void {
+    if (this.isDestroy) return
+    url && (this.url = url)
+    this.close()
+    this.init(options)
+    this.connect()
   }
   static setHeaders(options: SSEOptions = {}): SSEOptions {
     // to do 设置请求头
@@ -75,7 +75,7 @@ export default class SSEClient {
     return finallyUrl || url
   }
   _sseHandler(eventName: string, event: SSEListenerParams): void {
-    if (!this.eventsMap || !this.eventsMap.get(eventName)) {
+    if (!this.eventsMap) {
       return
     }
     const { listeners } = this.eventsMap.get(eventName)!
@@ -83,8 +83,6 @@ export default class SSEClient {
       try {
         const data = JSON.parse(event.data)
         event.data = data
-        console.log(listeners)
-
         listeners.forEach(cb => {
           cb(event)
         })
@@ -101,6 +99,7 @@ export default class SSEClient {
     }
   }
   addEventListener(eventName: string, listener: SSEListener): void {
+    console.log('addEventListener', eventName)
     if (!this.eventsMap) return console.warn('SSEClient 已被销毁')
     if (!this.eventsMap.get(eventName)) {
       this.eventsMap.set(eventName, {
@@ -108,14 +107,13 @@ export default class SSEClient {
         listenerHandler: null,
         listeners: []
       })
+      console.log(this.eventsMap)
     }
     const eventInfo = this.eventsMap.get(eventName)
     if (eventInfo) {
       const { listeners } = eventInfo
       if (!eventInfo?.isAdd) {
         const cb: SSEListener = event => {
-          console.log(event)
-
           event && this._sseHandler(eventName, event)
         }
         eventInfo.listenerHandler = cb
@@ -125,8 +123,20 @@ export default class SSEClient {
 
       if (listeners.indexOf(listener) === -1) {
         listeners.push(listener)
+      } else {
+        console.log(1111)
       }
     }
+  }
+  _initAddEvents(): void {
+    if (!this.eventsMap) return console.warn('SSEClient 已被销毁')
+    this.eventsMap.forEach((eventInfo, eventName) => {
+      eventInfo.isAdd = false
+      const { listeners } = eventInfo
+      listeners.forEach(callback => {
+        this.addEventListener(eventName, callback)
+      })
+    })
   }
   connect(): void {
     if (this.open || this.isDestroy) {
@@ -139,16 +149,15 @@ export default class SSEClient {
     this.client?.addEventListener('error', event => {
       console.warn('Connection error:', event)
     })
+    this._initAddEvents()
   }
   close(): void {
-    if (this.open) {
-      this.open = false
-      this.client?.close()
-    }
+    this.open = false
+    console.log('close SSEClient')
+    this.client?.close()
   }
   destroy(): void {
-    console.log(111111)
-
+    console.log('destroy SSEClient')
     this.close()
     this.client = null
     this.eventsMap.clear()
