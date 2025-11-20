@@ -142,6 +142,7 @@ export class FetchEventStream {
         signal: this._curRequestController.signal
       })
       await onopen(response)
+
       await parseEventStreamLineByLine(
         response.body!,
         handleLines(

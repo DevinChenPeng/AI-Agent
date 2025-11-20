@@ -1,20 +1,15 @@
 import { FC } from 'react'
 import { useBaseHooks } from './hooks/useBaseHooks'
 import { Button } from 'antd'
+import { Input } from 'antd'
+const { TextArea } = Input
 interface ComponentNameProps {}
 
 const ComponentName: FC<ComponentNameProps> = props => {
-  const { fetchEventSourceClient } = useBaseHooks()
+  const { sseClient } = useBaseHooks()
   return (
     <div className="container">
-      <Button
-        type="primary"
-        onClick={() => {
-          fetchEventSourceClient?.close()
-        }}
-      >
-        关闭链接
-      </Button>
+      <TextArea rows={4} />
     </div>
   )
 }

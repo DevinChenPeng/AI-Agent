@@ -6,6 +6,7 @@ export interface SSEOptions extends RequestInit {
   headers?: Record<string, string>
   data?: Array<Record<string, unknown>> | Record<string, unknown> // POST请求时发送的数据
   openWhenHidden?: boolean // 是否在页面不可见时保持连接
+  params?: Record<string, string> // URL查询参数
 }
 
 /**
@@ -20,8 +21,10 @@ class RetriableError extends Error {}
  */
 class FatalError extends Error {}
 
+export type SSEListenerParams = EventSourceMessage
+
 // SSE事件监听器类型定义
-type SSEListener = (event?: unknown) => void
+export type SSEListener = (event?: SSEListenerParams) => void
 
 /**
  * FetchEventSourceClient 类
@@ -69,7 +72,8 @@ export class FetchEventSourceClient {
       onopen: async response => {
         // 检查响应是否成功且内容类型正确
         if (response.ok && response.headers.get('content-type')?.startsWith(EventStreamContentType)) {
-          console.log(response)
+          this._triggerEvent('open', response as unknown as EventSourceMessage)
+          return
         }
         // 客户端错误(4xx)视为致命错误
         else if (response.status >= 400 && response.status < 500) {
@@ -114,8 +118,11 @@ export class FetchEventSourceClient {
   _triggerEvent(eventName: string, data: EventSourceMessage): void {
     try {
       const listeners = this._listenerMap.get(eventName)
+      console.log(listeners)
       if (listeners) {
         listeners.forEach(listener => {
+          console.log(data)
+
           listener(data)
         })
       }
