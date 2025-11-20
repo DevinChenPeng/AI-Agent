@@ -1,35 +1,44 @@
 import useSinglePostSSEClient from '@renderer/hooks/useSinglePostSSEClient'
 import SSEClient from '@renderer/utils/SSEClient'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // 定义返回值类型
 type UseBaseHooksReturn = {
   connect: () => void
   connect2: () => void
   close: () => void
   markdown: string
+  text: string
+  setText: (text: string) => void
+  listRef: React.RefObject<HTMLDivElement | null>
 }
 const PAGE_BROADCAST = (event): void => {
   console.log(event)
 }
 export const useBaseHooks = (): UseBaseHooksReturn => {
   const [markdown, setMarkdown] = useState('')
+  const [text, setText] = useState('')
+  const listRef = useRef<HTMLDivElement | null>(null)
   const pageSSEClient = useSinglePostSSEClient(
     'https://qa-tyxk.meosedge.com/meos-control-server-edge/server-event/sse/subscribe?PAGE_BROADCAST'
   )
-  pageSSEClient?.addEventListener('PAGE_BROADCAST', PAGE_BROADCAST)
-
   const chartSSEClient = useSinglePostSSEClient('http://localhost:1234/api/llm/chart')
+  useEffect(() => {
+    pageSSEClient?.addEventListener('PAGE_BROADCAST', PAGE_BROADCAST)
+  }, [pageSSEClient])
 
-  chartSSEClient?.addEventListener('message', event => {
-    const data = event?.data
-    console.log(data)
-    if (data && typeof data === 'object' && 'message' in data) {
-      const message = (data as Record<string, unknown>).message
-      if (typeof message === 'string') {
-        setMarkdown(prev => prev + message)
+  useEffect(() => {
+    chartSSEClient?.addEventListener('message', event => {
+      const data = event?.data
+      console.log(data)
+      if (data && typeof data === 'object' && 'message' in data) {
+        const message = (data as Record<string, unknown>).message
+        if (typeof message === 'string') {
+          setMarkdown(prev => prev + message)
+        }
       }
-    }
-  })
+      listRef.current?.scrollTo(0, listRef.current.scrollHeight)
+    })
+  }, [chartSSEClient])
   const connect = (): void => {
     pageSSEClient?.setOptions({
       method: 'POST',
@@ -60,15 +69,18 @@ export const useBaseHooks = (): UseBaseHooksReturn => {
     console.log(pageSSEClient)
   }
   const connect2 = (): void => {
+    if (!text) {
+      return
+    }
     chartSSEClient?.setOptions({
       method: 'POST',
       data: {
-        text: '请生成一个关于AI的图表，并返回给用户。'
+        text
       }
     })
   }
   const close = (): void => {
     chartSSEClient?.close()
   }
-  return { connect, connect2, markdown, close }
+  return { connect, connect2, markdown, close, text, setText, listRef }
 }
