@@ -79,10 +79,10 @@ export class FetchEventStream {
   private _headers: Record<string, string> = {}
   private _curRequestController: AbortController | null
   private _retryInterval = DEFAULT_RETRY_INTERVAL // 可动态调整（onerror 返回值）
-  private _retryTimer = 0
-  private _disposed = false
-  private _resolve?: () => void
-  private _reject?: (err: unknown) => void
+  private _retryTimer = 0 // 重试定时器
+  private _disposed = false // 标识实例是否已销毁，防止重复调用 dispose 以及在销毁后继续执行异步操作
+  private _resolve?: () => void // 连接成功时调用，通知调用方
+  private _reject?: (err: unknown) => void // 连接失败时调用，通知调用方
   constructor(url: RequestInfo, options: FetchEventSourceInit) {
     this._url = url
     this._options = options || {}
@@ -113,13 +113,21 @@ export class FetchEventStream {
   }
   onVisibilityChange(): void {
     // 在每次可见性变化时关闭现有请求
-    this._curRequestController?.abort()
+    if (this._curRequestController) {
+      this._curRequestController.abort()
+      // 页面隐藏导致连接断开，触发 onclose
+      if (document.hidden) {
+        this._options.onclose?.()
+      }
+    }
     if (!document.hidden) {
       this.create() // 重新创建连接
     }
   }
   abort(): void {
     if (this._disposed) return
+    // 主动中止连接，触发 onclose
+    this._options.onclose?.()
     this.dispose()
   }
   private dispose(): void {
@@ -157,7 +165,9 @@ export class FetchEventStream {
           )
         )
       )
-      // 连接建立成功，通知调用方（仅首次或每次成功重连都可触发，这里选择每次 create 成功都触发）
+      // 流正常结束，触发 onclose（服务器主动关闭连接）
+      onclose?.()
+      // 首次连接建立成功时通知调用方（resolve Promise）；后续重连不会再触发
       this._resolve?.()
     } catch (error) {
       const retryDelay = this.handleError(error)
