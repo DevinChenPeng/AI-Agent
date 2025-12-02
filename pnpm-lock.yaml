@@ -13,10 +13,10 @@ importers:
         version: 6.1.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@electron-toolkit/preload':
         specifier: ^3.0.2
-        version: 3.0.2(electron@38.6.0)
+        version: 3.0.2(electron@39.2.4)
       '@electron-toolkit/utils':
         specifier: ^4.0.0
-        version: 4.0.0(electron@38.6.0)
+        version: 4.0.0(electron@39.2.4)
       antd:
         specifier: '6'
         version: 6.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -73,8 +73,8 @@ importers:
         specifier: ^5.0.3
         version: 5.1.1(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(yaml@2.8.1))
       electron:
-        specifier: ^38.1.2
-        version: 38.6.0
+        specifier: ^39.2.4
+        version: 39.2.4
       electron-builder:
         specifier: ^25.1.8
         version: 25.1.8(electron-builder-squirrel-windows@25.1.8)
@@ -1821,8 +1821,8 @@ packages:
       '@swc/core':
         optional: true
 
-  electron@38.6.0:
-    resolution: {integrity: sha512-68OFNxJlrEStA+t8k5atzf4frJddvRR1N1oalr49Ll8YZ0+0nEsDhw4UNhTCoZKTjSYcxFF/4rt+sco+OlnB3g==}
+  electron@39.2.4:
+    resolution: {integrity: sha512-KxPtwpFceQKSxRtUY39piHLYhJMMyHfOhc70e6zRnKGrbRdK6hzEqssth8IGjlKOdkeT4KCvIEngnNraYk39+g==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -4426,17 +4426,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron-toolkit/preload@3.0.2(electron@38.6.0)':
+  '@electron-toolkit/preload@3.0.2(electron@39.2.4)':
     dependencies:
-      electron: 38.6.0
+      electron: 39.2.4
 
   '@electron-toolkit/tsconfig@2.0.0(@types/node@22.19.1)':
     dependencies:
       '@types/node': 22.19.1
 
-  '@electron-toolkit/utils@4.0.0(electron@38.6.0)':
+  '@electron-toolkit/utils@4.0.0(electron@39.2.4)':
     dependencies:
-      electron: 38.6.0
+      electron: 39.2.4
 
   '@electron/asar@3.4.1':
     dependencies:
@@ -6144,7 +6144,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@38.6.0:
+  electron@39.2.4:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 22.19.1
