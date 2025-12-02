@@ -37,7 +37,7 @@ export default class SSEClient {
     this.options = SSEClient.setHeaders(options)
     this.url = SSEClient.setUrl(this.url, this.options)
   }
-  setOptions(options: SSEOptions = {}, url?: string): void {
+  send(options: SSEOptions = {}, url?: string): void {
     if (this.isDestroy) return
     url && (this.url = url)
     this.close()
@@ -99,7 +99,6 @@ export default class SSEClient {
     }
   }
   addEventListener(eventName: string, listener: SSEListener): void {
-    console.log('addEventListener', eventName)
     if (!this.eventsMap) return console.warn('SSEClient 已被销毁')
     if (!this.eventsMap.get(eventName)) {
       this.eventsMap.set(eventName, {
@@ -107,7 +106,6 @@ export default class SSEClient {
         listenerHandler: null,
         listeners: []
       })
-      console.log(this.eventsMap)
     }
     const eventInfo = this.eventsMap.get(eventName)
     if (eventInfo) {
@@ -123,8 +121,24 @@ export default class SSEClient {
 
       if (listeners.indexOf(listener) === -1) {
         listeners.push(listener)
-      } else {
-        console.log(1111)
+      }
+    }
+  }
+  removeEventListener(eventName: string, listener: SSEListener): void {
+    if (!this.eventsMap) return console.warn('SSEClient 已被销毁')
+    const eventInfo = this.eventsMap.get(eventName)
+    if (eventInfo) {
+      const { listeners } = eventInfo
+      if (listeners) {
+        const index = listeners.indexOf(listener)
+        if (index !== -1) {
+          listeners.splice(index, 1)
+        }
+        if (listeners.length === 0) {
+          const cb = eventInfo.listenerHandler as SSEListener
+          this.client?.removeEventListener(eventName, cb)
+          eventInfo.isAdd = false
+        }
       }
     }
   }
@@ -153,11 +167,9 @@ export default class SSEClient {
   }
   close(): void {
     this.open = false
-    console.log('close SSEClient')
     this.client?.close()
   }
   destroy(): void {
-    console.log('destroy SSEClient')
     this.close()
     this.client = null
     this.eventsMap.clear()

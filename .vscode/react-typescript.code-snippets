@@ -2,7 +2,7 @@
 	 "React ClassName": {
     "prefix": "rc",
     "body": [
-      "className={styles['']}",
+      "className={cn(styles)}",
     ],
     "description": "创建 CSS 模块类名"
   },

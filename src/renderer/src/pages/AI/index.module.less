@@ -1,5 +1,18 @@
 .AI_list_container {
-  overflow: auto;
   height: 100%;
   padding: var(--spacing-2xl);
+  &.is_new {
+    .name {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      margin: 0 auto;
+      margin-bottom: var(--spacing-3xl);
+    }
+  }
+  .chat_list {
+    overflow: auto;
+    width: 100%;
+    flex: 1;
+    padding-bottom: var(--spacing-4xl);
+  }
 }

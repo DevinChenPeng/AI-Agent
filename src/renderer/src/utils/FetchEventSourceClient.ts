@@ -24,7 +24,7 @@ class FatalError extends Error {}
 // 替换原有 SSEListenerParams 定义如下：
 
 export type SSEListenerParams = Omit<EventSourceMessage, 'data'> & {
-  data: Record<string, string> | string
+  data: Record<string, any> | string
 }
 
 // SSE事件监听器类型定义

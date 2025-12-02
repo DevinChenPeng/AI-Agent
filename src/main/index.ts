@@ -1,8 +1,10 @@
 import { app, shell, BrowserWindow, ipcMain, screen, session } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { installExtension, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import icon from '../../resources/icon.png?asset'
-
+// 禁用 Electron 的安全警告（开发环境可选）
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 function createWindow(): void {
   // 获取主显示器工作区尺寸（不含任务栏）
   const { width, height } = screen.getPrimaryDisplay().workAreaSize
@@ -18,7 +20,8 @@ function createWindow(): void {
       sandbox: false
     }
   })
-
+  // 打开开发者工具（可选）
+  mainWindow.webContents.openDevTools()
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
@@ -40,7 +43,18 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  // 仅在开发环境安装 React DevTools
+  if (is.dev) {
+    try {
+      // 安装 React DevTools 扩展
+      const extensionName = await installExtension(REACT_DEVELOPER_TOOLS, {})
+      console.log(`✅ 成功安装扩展：${extensionName}`)
+      console.log('💡 提示：打开 DevTools 后，在顶部标签栏查找 "⚛️ Components" 和 "⚛️ Profiler" 标签')
+    } catch (err) {
+      console.error('❌ 安装 React DevTools 失败：', err)
+    }
+  }
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 

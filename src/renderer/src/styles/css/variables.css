@@ -112,7 +112,7 @@
 }
 
 /* ==================== 深色模式变量 ==================== */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --color-text-primary: #e8e8e8;
     --color-text-secondary: #a6a6a6;
@@ -127,4 +127,4 @@
     --color-border-secondary: #333333;
     --color-border-tertiary: #262626;
   }
-}
+} */

@@ -38,7 +38,8 @@ export default defineConfig(
         }
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
-      'prettier/prettier': 'off'
+      'prettier/prettier': 'off',
+      'react-hooks/exhaustive-deps': 'off'
     }
   },
   eslintConfigPrettier

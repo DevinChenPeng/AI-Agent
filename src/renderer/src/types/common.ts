@@ -5,3 +5,8 @@ export interface BaseResponse<T> {
   message?: string
 }
 export type HttpResponse<T> = Promise<BaseResponse<T>>
+
+export interface BaseObject {
+  id: string
+  name: string
+}
