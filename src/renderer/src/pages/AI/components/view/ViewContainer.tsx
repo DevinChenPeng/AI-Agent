@@ -1,12 +1,21 @@
 import { FC } from 'react'
-import styles from './chat.module.less'
+import styles from './view.module.less'
 import { cn } from '@renderer/utils/classNames'
+import { ChatMessage } from '@renderer/types/chat'
+import Question from './Question'
+import Think from './Think'
 const { container } = styles
 interface ComponentNameProps {
-  contextList: Array<unknown>
+  data: ChatMessage
 }
 const ViewContainer: FC<ComponentNameProps> = props => {
-  return <div className={cn(container)}></div>
+  const { question, message } = props.data
+  return (
+    <div className={cn(container, 'w-full')}>
+      {question ? <Question question={question}></Question> : null}
+      {message ? <Think message={message}></Think> : null}
+    </div>
+  )
 }
 
 export default ViewContainer

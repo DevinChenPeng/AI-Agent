@@ -170,11 +170,15 @@ export class FetchEventStream {
       // 首次连接建立成功时通知调用方（resolve Promise）；后续重连不会再触发
       this._resolve?.()
     } catch (error) {
-      const retryDelay = this.handleError(error)
-      if (retryDelay != null && retryDelay >= 0 && !this._disposed) {
-        this._retryTimer = window.setTimeout(() => this.create(), retryDelay)
-      } else {
-        this._reject?.(error)
+      if (!this._curRequestController.signal.aborted) {
+        try {
+          const interval = (this._options.onerror?.(error) ?? this._retryInterval) as number
+          window.clearTimeout(this._retryTimer)
+          this._retryTimer = window.setTimeout(this.create, interval)
+        } catch (innerErr) {
+          this.dispose()
+          this._reject?.(innerErr)
+        }
       }
     }
   }
@@ -182,19 +186,6 @@ export class FetchEventStream {
     const contentType = response.headers.get('Content-Type') || ''
     if (!contentType.includes(EventStreamContentType)) {
       throw new Error(`Expected content-type to be ${EventStreamContentType}, but received ${contentType}`)
-    }
-  }
-  private handleError(err: unknown): number | null | undefined {
-    if (this._disposed) return null
-    try {
-      const maybe = this._options.onerror?.(err)
-      // onerror 未返回值 -> 使用默认重试间隔
-      if (maybe == null) return this._retryInterval
-      // 返回数字 -> 使用该间隔
-      return maybe
-    } catch {
-      // 回调中显式抛出 -> 视为致命错误
-      return null
     }
   }
 }

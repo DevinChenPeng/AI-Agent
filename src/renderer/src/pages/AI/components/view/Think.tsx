@@ -7,7 +7,7 @@ import hljs from 'highlight.js' // 代码语法高亮
 import 'highlight.js/styles/github.css' // highlight.js 的 GitHub 风格高亮样式
 import 'github-markdown-css/github-markdown.css' // 引入 github-markdown 双主题样式
 interface ComponentNameProps {
-  markdown: string
+  message: string
 }
 const renderCodeBlock: Components['code'] = ({ node, className, children, ...props }) => {
   // 匹配代码语言（如 language-javascript）
@@ -43,7 +43,7 @@ const Think: FC<ComponentNameProps> = props => {
             code: renderCodeBlock
           }}
         >
-          {props.markdown}
+          {props.message}
         </ReactMarkdown>
       </div>
     </div>

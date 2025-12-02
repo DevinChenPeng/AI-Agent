@@ -71,6 +71,8 @@ export class FetchEventSourceClient {
    * 建立SSE连接
    */
   connect(): void {
+    const DEFAULT_RETRY_INTERVAL = 1000
+    let retryCount = 5
     this._eventStream = new FetchEventStream(this._url, {
       ...this._options,
       onopen: async response => {
@@ -89,8 +91,8 @@ export class FetchEventSourceClient {
         }
       },
       onclose: () => {
-        // 连接关闭时抛出可重试错误
-        throw new RetriableError('SSE connection closed')
+        // 连接关闭时触发 close 事件
+        this._triggerEvent('close')
       },
       onmessage: msg => {
         const { event } = msg
@@ -105,8 +107,16 @@ export class FetchEventSourceClient {
           this._triggerEvent(event, msg)
         }
       },
-      onerror: error => {
-        console.error('SSE error:', error)
+      onerror: err => {
+        this._triggerEvent('error', err as unknown as EventSourceMessage)
+        if (err instanceof RetriableError) {
+          return DEFAULT_RETRY_INTERVAL // 1s 后重试
+        } else if (err instanceof FatalError) {
+          throw err
+        } else if (retryCount-- > 0) {
+          return DEFAULT_RETRY_INTERVAL // 1s 后重试
+        }
+        throw err
       }
     })
 
@@ -125,7 +135,7 @@ export class FetchEventSourceClient {
    * @param eventName - 事件名称
    * @param data - 事件数据
    */
-  _triggerEvent(eventName: string, data: EventSourceMessage): void {
+  _triggerEvent(eventName: string, data?: EventSourceMessage): void {
     try {
       const listeners = this._listenerMap.get(eventName)
       if (listeners) {
