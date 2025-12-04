@@ -88,6 +88,8 @@ export default class SSEClient {
         })
       } catch (error) {
         console.log('event.data is no JSON', error)
+        console.log(event.data)
+
         listeners.forEach(cb => {
           cb(event)
         })
@@ -163,6 +165,8 @@ export default class SSEClient {
     this.client?.addEventListener('error', event => {
       console.warn('Connection error:', event)
     })
+    console.log(this.eventsMap)
+
     this._initAddEvents()
   }
   close(): void {

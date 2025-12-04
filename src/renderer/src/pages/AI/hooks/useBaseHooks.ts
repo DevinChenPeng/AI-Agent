@@ -1,9 +1,9 @@
-import useSinglePostSSEClient from '@renderer/hooks/useSinglePostSSEClient'
-import { ChatMessage, Chats } from '@renderer/types/chat'
+import { ChatMessage, Chats, EventData } from '@renderer/types/chat'
 import { SSEListenerParams } from '@renderer/utils/FetchEventSourceClient'
-import { createSseConfig, endEvent, messageEvent, startEvent } from '@renderer/utils/sse-events'
+import { messageEvent } from '@renderer/utils/sse-events'
 import { useEffect, useRef, useState } from 'react'
 import { uniqueId } from 'lodash'
+import useSinglePostSSEClient from '@renderer/hooks/useSinglePostSSEClient'
 // 定义返回值类型
 type UseBaseHooksReturn = {
   chatList: Chats
@@ -17,49 +17,58 @@ export const useBaseHooks = (): UseBaseHooksReturn => {
   const messageRef = useRef<ChatMessage>({
     id: '',
     question: '',
+    think: {
+      content: '',
+      startName: '',
+      endName: ''
+    },
     message: ''
   }) // 消息参考
-
-  // 创建 chartSSEClient 实例
-  const chartSSEClient = useSinglePostSSEClient('http://localhost:1234/api/llm/chart')
-  // 定义 messageFn 函数
+  const { sseClient, send } = useSinglePostSSEClient('http://localhost:1234/api/llm/chart')
   const messageFn = (event?: SSEListenerParams): void =>
-    messageEvent(event, (message: string) => {
+    messageEvent(event, (data: EventData) => {
       // 将 SSE 推送的内容拼接到缓存中
-      messageRef.current.message = `${messageRef.current.message ?? ''}${message}`
+      console.log(data)
+      if (data.type === 'think-start') {
+        messageRef.current.think.content = ''
+        messageRef.current.think.startName = data.content!
+      }
+      if (data.type === 'think') {
+        messageRef.current.think.content += data.content
+      }
+      if (data.type === 'think-end') {
+        messageRef.current.think.endName = data.content!
+      }
+      if (data.type === 'text') {
+        messageRef.current.message = `${messageRef.current.message ?? ''}${data.content}`
+      }
       setChatList(prev =>
-        prev.map(chat => (chat.id === messageRef.current.id ? { ...chat, message: messageRef.current.message } : chat))
+        prev.map(chat => {
+          if (chat.id === messageRef.current.id) {
+            return { ...chat, message: messageRef.current.message, think: messageRef.current.think }
+          }
+          return chat
+        })
       )
     })
-  const endFn = (): void =>
-    endEvent(() => {
-      // 推送结束后清空缓存，等待下一次推送
-      messageRef.current = { id: '', question: '', message: '' }
-    })
-  const startFn = (event?: SSEListenerParams): void =>
-    startEvent(event, (id: string) => {
-      // 初始化一条新的回答消息，并立即插入 chatList 以实现流式渲染
-      messageRef.current = {
-        id,
-        question: '',
-        message: ''
-      }
-      setChatList(prev => [...prev, { ...messageRef.current }])
-    })
-  // 添加事件监听器
   useEffect(() => {
-    chartSSEClient?.addEventListener('message', messageFn)
-    chartSSEClient?.addEventListener('end', endFn)
-    chartSSEClient?.addEventListener('start', startFn)
+    if (sseClient) {
+      sseClient.addEventListener('message', messageFn)
+    }
     return () => {
-      chartSSEClient?.removeEventListener('message', messageFn)
-      chartSSEClient?.removeEventListener('end', endFn)
-      chartSSEClient?.removeEventListener('start', startFn)
-    } // 添加移除事件监听器的逻辑
-  }, [chartSSEClient])
+      if (sseClient) {
+        sseClient.removeEventListener('message', messageFn)
+      }
+    }
+  }, [])
+
   const onSendMessage = (question: string): void => {
-    setChatList(prev => [...prev, { id: uniqueId('chat_'), question, message: '' }])
-    chartSSEClient?.send(createSseConfig(question))
+    const id = uniqueId('chat_')
+    messageRef.current.id = id
+    messageRef.current.question = question
+    messageRef.current.message = ''
+    setChatList(prev => [...prev, { id, question, message: '', think: messageRef.current.think }])
+    send(question)
   }
 
   return { chatList, setChatList, onSendMessage }

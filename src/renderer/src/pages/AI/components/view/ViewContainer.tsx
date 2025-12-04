@@ -4,16 +4,20 @@ import { cn } from '@renderer/utils/classNames'
 import { ChatMessage } from '@renderer/types/chat'
 import Question from './Question'
 import Think from './Think'
+import Answer from './Answer'
 const { container } = styles
 interface ComponentNameProps {
   data: ChatMessage
 }
 const ViewContainer: FC<ComponentNameProps> = props => {
-  const { question, message } = props.data
+  const { question, message, think } = props.data
   return (
     <div className={cn(container, 'w-full')}>
       {question ? <Question question={question}></Question> : null}
-      {message ? <Think message={message}></Think> : null}
+      {think.startName ? (
+        <Think content={think?.content} startName={think?.startName} endName={think?.endName} />
+      ) : null}
+      {message ? <Answer message={message} /> : null}
     </div>
   )
 }

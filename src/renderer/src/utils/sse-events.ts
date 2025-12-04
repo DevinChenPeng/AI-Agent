@@ -1,3 +1,4 @@
+import { EventData } from '@renderer/types/chat'
 import { SSEListenerParams, SSEOptions } from './FetchEventSourceClient'
 
 export const createSseConfig = (message: string): SSEOptions => ({
@@ -7,13 +8,10 @@ export const createSseConfig = (message: string): SSEOptions => ({
   }
 })
 
-export const messageEvent = (event?: SSEListenerParams, cb?: (data: string) => void): void => {
+export const messageEvent = (event?: SSEListenerParams, cb?: (data: EventData) => void): void => {
   const data = event?.data
   if (data && typeof data === 'object') {
-    const message = data.message
-    if (message && typeof message === 'string') {
-      cb?.(message)
-    }
+    cb?.({ ...data.message })
   }
 }
 

@@ -1,15 +1,25 @@
+import { createSseConfig } from '@renderer/utils/sse-events'
 import SSEClient from '@renderer/utils/SSEClient'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 
-export default (url: string): SSEClient | null => {
-  const [sseClient, setSSEClient] = useState(null as SSEClient | null)
+interface UseSinglePostSSEClient {
+  sseClient: SSEClient
+  send: (text: string) => void
+}
+export default (url: string): UseSinglePostSSEClient => {
+  const sseClient = useMemo(() => {
+    return new SSEClient(url)
+  }, [url]) // URL 变化时会重新创建
+
   useEffect(() => {
-    setSSEClient(new SSEClient(url))
-    // 组件卸载时清理资源
     return () => {
-      sseClient?.destroy()
+      sseClient.destroy()
     }
-  }, []) // 依赖数组为空，只在组件卸载时执行清理
+  }, [sseClient])
 
-  return sseClient
+  const send = (text: string): void => {
+    sseClient?.send(createSseConfig(text))
+  }
+
+  return { sseClient, send }
 }
