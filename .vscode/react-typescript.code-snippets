@@ -6,6 +6,13 @@
     ],
     "description": "创建 CSS 模块类名"
   },
+  "styles import": {
+    "prefix": "imstyles",
+    "body": [
+      "import styles from './${1:ComponentName}.less'",
+    ],
+    "description": "导入 CSS 模块"
+  },
   "React Function Component": {
     "prefix": "rfc",
     "body": [

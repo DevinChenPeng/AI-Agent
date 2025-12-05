@@ -1,0 +1,40 @@
+.expansion_collapse {
+  min-width: 120rem;
+  &.is-fold {
+    .expansion_collapse_left {
+      width: 100%;
+    }
+    .expansion_collapse_right {
+      width: 0;
+    }
+  }
+  &_left {
+    width: calc(100% - 400px);
+    padding-right: 2rem;
+  }
+  &_right {
+    width: 400px;
+    position: relative;
+    transition: all 0.5s;
+    .btn {
+      background-color: var(--color-bg-default);
+      width: 1.2rem;
+      height: 4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: var(--spacing-sm) 0 0 var(--spacing-sm);
+      left: -1.2rem;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      &.is-fold {
+        :global(.anticon) {
+          transform: rotate(-180deg);
+        }
+      }
+      &:hover {
+        color: var(--color-primary);
+        opacity: 0.7;
+      }
+    }
+  }
+}

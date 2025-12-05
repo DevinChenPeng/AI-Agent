@@ -207,6 +207,13 @@
   overflow-y: auto;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
 .fc {
   display: flex;
   align-items: center;
