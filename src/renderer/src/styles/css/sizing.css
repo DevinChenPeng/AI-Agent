@@ -78,6 +78,7 @@
   max-width: var(--container-2xl);
 }
 
+/* ==================== 字体加粗的权重==================== */
 .f-w-300 {
   font-weight: var(--font-weight-light);
 }
@@ -92,4 +93,34 @@
 }
 .f-w-700 {
   font-weight: var(--font-weight-bold);
+}
+
+/* ===================== 字体大小 ===================== */
+
+.text-12 {
+  font-size: var(--font-size-xs);
+}
+.text-13 {
+  font-size: var(--font-size-sm);
+}
+.text-14 {
+  font-size: var(--font-size-base);
+}
+.text-16 {
+  font-size: var(--font-size-lg);
+}
+.text-18 {
+  font-size: var(--font-size-xl);
+}
+.text-20 {
+  font-size: var(--font-size-2xl);
+}
+.text-24 {
+  font-size: var(--font-size-3xl);
+}
+.text-30 {
+  font-size: var(--font-size-4xl);
+}
+.text-36 {
+  font-size: var(--font-size-5xl);
 }

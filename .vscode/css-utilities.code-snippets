@@ -4,6 +4,76 @@
     "body": ["flex"],
     "description": "布局: display:flex"
   },
+  "css: f-w-300": {
+    "prefix": "fw300",
+    "body": ["f-w-300"],
+    "description": "字体粗细: 300 (light)"
+  },
+  "css: f-w-400": {
+    "prefix": "fw400",
+    "body": ["f-w-400"],
+    "description": "字体粗细: 400 (normal)"
+  },
+  "css: f-w-500": {
+    "prefix": "fw500",
+    "body": ["f-w-500"],
+    "description": "字体粗细: 500 (medium)"
+  },
+  "css: f-w-600": {
+    "prefix": "fw600",
+    "body": ["f-w-600"],
+    "description": "字体粗细: 600 (semibold)"
+  },
+  "css: f-w-700": {
+    "prefix": "fw700",
+    "body": ["f-w-700"],
+    "description": "字体粗细: 700 (bold)"
+  },
+  "css: text-xs": {
+    "prefix": "t12",
+    "body": ["text-12"],
+    "description": "字体大小: t12"
+  },
+  "css: text-sm": {
+    "prefix": "t13",
+    "body": ["text-13"],
+    "description": "字体大小: t13"
+  },
+  "css: text-base": {
+    "prefix": "t14",
+    "body": ["text-14"],
+    "description": "字体大小: t14"
+  },
+  "css: text-lg": {
+    "prefix": "t16",
+    "body": ["text-16"],
+    "description": "字体大小: t16"
+  },
+  "css: text-xl": {
+    "prefix": "t18",
+    "body": ["text-18"],
+    "description": "字体大小: t18"
+  },
+  "css: text-2xl": {
+    "prefix": "t20",
+    "body": ["text-20"],
+    "description": "字体大小: t20"
+  },
+  "css: text-3xl": {
+    "prefix": "t24",
+    "body": ["text-24"],
+    "description": "字体大小: t24"
+  },
+  "css: text-4xl": {
+    "prefix": "t30",
+    "body": ["text-30"],
+    "description": "字体大小: t30"
+  },
+  "css: text-5xl": {
+    "prefix": "t36",
+    "body": ["text-36"],
+    "description": "字体大小: t36"
+  },
   "css: flex-row": {
     "prefix": "fr",
     "body": ["flex-row"],
