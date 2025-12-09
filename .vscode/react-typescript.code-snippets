@@ -17,6 +17,8 @@
     "prefix": "rfc",
     "body": [
       "import { FC } from 'react'",
+			"import { cn } from '@renderer/utils/classNames'",
+			"import styles from './${1:ComponentName}.less'",
       "",
       "interface ${1:ComponentName}Props {",
       "  $2",

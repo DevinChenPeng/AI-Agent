@@ -3,12 +3,13 @@ import { FC, useState } from 'react'
 import styles from './index.module.less'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 interface ExpansionCollapseProps {
-  children?: React.ReactNode
+  left?: React.ReactNode
+  right?: React.ReactNode
   isFold: boolean
   setIsFold: (isFold: boolean) => void
 }
 
-const ExpansionCollapse: FC<ExpansionCollapseProps> = ({ isFold, children, setIsFold }) => {
+const ExpansionCollapse: FC<ExpansionCollapseProps> = ({ isFold, left, right, setIsFold }) => {
   const changeFold = (): void => setIsFold(!isFold)
   return (
     <div
@@ -18,11 +19,12 @@ const ExpansionCollapse: FC<ExpansionCollapseProps> = ({ isFold, children, setIs
         isFold && styles['is-fold']
       )}
     >
-      <div className={cn(styles.expansion_collapse_left)}></div>
+      <div className={cn(styles.expansion_collapse_left)}>{left}</div>
       <div className={cn(styles.expansion_collapse_right)}>
         <div className={cn(styles.btn, 'absolute fcc', isFold && styles['is-fold'])} onClick={changeFold}>
           <RightOutlined className={cn(styles.btn_svg)} />
         </div>
+        {right}
       </div>
     </div>
   )

@@ -5,5 +5,14 @@ import './styles/css/index.css'
 import './styles/less/index.less'
 import { createRoot } from 'react-dom/client'
 import App from './App'
+import { StrictMode } from 'react'
+import store from './store'
+import { Provider } from 'react-redux'
 
-createRoot(document.getElementById('root')!).render(<App />)
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>
+)

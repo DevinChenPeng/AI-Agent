@@ -77,3 +77,19 @@
 .max-w-2xl {
   max-width: var(--container-2xl);
 }
+
+.f-w-300 {
+  font-weight: var(--font-weight-light);
+}
+.f-w-400 {
+  font-weight: var(--font-weight-normal);
+}
+.f-w-500 {
+  font-weight: var(--font-weight-medium);
+}
+.f-w-600 {
+  font-weight: var(--font-weight-semibold);
+}
+.f-w-700 {
+  font-weight: var(--font-weight-bold);
+}
