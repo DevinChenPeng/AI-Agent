@@ -1,4 +1,9 @@
 {
+	"css: global": {
+    "prefix": ":g",
+    "body": [":global(${1:})"],
+    "description": "全局选择器"
+  },
   "css: flex": {
     "prefix": "f",
     "body": ["flex"],

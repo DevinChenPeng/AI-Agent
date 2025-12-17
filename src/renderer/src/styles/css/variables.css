@@ -34,6 +34,7 @@
   --color-border-primary: #d9d9d9;
   --color-border-secondary: #e8e8e8;
   --color-border-tertiary: #f0f0f0;
+  --alpha-30: rgba(196, 201, 207, 0.3);
 
   /* ==================== 阴影 ==================== */
   /* 阴影尺寸由 px 转为 rem (1rem = 10px) */
