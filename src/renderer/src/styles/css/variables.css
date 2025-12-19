@@ -36,6 +36,10 @@
   --color-border-tertiary: #f0f0f0;
   --alpha-30: rgba(196, 201, 207, 0.3);
 
+  /* ==================== 滚动条颜色 ==================== */
+  --scroll-bg-color: rgb(229, 229, 229);
+  --scroll-hover-bg-color: #d9d9d9;
+
   /* ==================== 阴影 ==================== */
   /* 阴影尺寸由 px 转为 rem (1rem = 10px) */
   --shadow-sm: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.08); /* 0 2px 4px */

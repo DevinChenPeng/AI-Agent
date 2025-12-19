@@ -4,8 +4,17 @@
     cursor: pointer;
     text-indent: var(--spacing-xs);
     border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
     &:hover {
       background: linear-gradient(90deg, rgba(196, 201, 207, 0.3) 0%, rgba(196, 201, 207, 0) 100%);
     }
+  }
+  .floor_spaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+  & + .floor {
+    margin-top: var(--spacing-xl);
   }
 }

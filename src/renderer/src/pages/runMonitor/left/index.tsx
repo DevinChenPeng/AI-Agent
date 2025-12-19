@@ -4,6 +4,7 @@ import styles from './styles/index.module.less'
 import Top from './Top'
 import { BuildingToiletTree } from '../types'
 import BuildFLoorTree from './BuildFLoorTree'
+import SimpleBar from 'simplebar-react'
 
 interface LeftProps {
   toiletTreeData: BuildingToiletTree[]
@@ -11,10 +12,10 @@ interface LeftProps {
 
 const Left: FC<LeftProps> = props => {
   return (
-    <div className={cn(styles.run_monitor_left, 'h-full')}>
+    <SimpleBar id="left" className={cn(styles.run_monitor_left, 'h-full')} autoHide>
       <Top />
       <BuildFLoorTree toiletTreeData={props.toiletTreeData} />
-    </div>
+    </SimpleBar>
   )
 }
 

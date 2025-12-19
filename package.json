@@ -37,7 +37,9 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.5",
     "react-syntax-highlighter": "^16.1.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "resize-observer-polyfill": "^1.5.1",
+    "simplebar-react": "^3.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",

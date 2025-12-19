@@ -1,10 +1,11 @@
 import { treeBuildingFloorSpace } from '@renderer/api/common'
-import { TOILET } from '@renderer/api/runMonitor'
+import { TOILET, listInfoCodeConfigsByObjectId } from '@renderer/api/runMonitor'
 import { Build, Floor } from '@renderer/types/common'
 import getCancelToken from '@renderer/utils/http/getCancelToken'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ToiletSpaceItem, BuildingToiletTree } from '../types'
 import { HTTP_STATUS } from '@renderer/constants/http'
+import { useElementLoading } from '@renderer/hooks/useElementLoading'
 const { cancelToken, cancelQuest } = getCancelToken()
 
 /**
@@ -22,6 +23,7 @@ export const useBaseData = (): BaseData => {
   const [buildFloorMap, setBuildFloorMap] = useState<Map<string, Build | Floor>>(new Map())
   const [toiletSpaceMap, setToiletSpaceMap] = useState<Map<string, ToiletSpaceItem>>(new Map())
   const [toiletTreeData, setToiletTreeData] = useState<BuildingToiletTree[]>([])
+  const { startLoading, stopLoading } = useElementLoading('#left', null)
   const getLocaltionData = async (): Promise<void> => {
     cancelQuest()
     try {
@@ -109,8 +111,10 @@ export const useBaseData = (): BaseData => {
   }
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
+      startLoading()
       await getLocaltionData()
-      getToiletList()
+      await getToiletList()
+      stopLoading()
     }
     fetchData()
     return () => {

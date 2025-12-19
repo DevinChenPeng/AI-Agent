@@ -69,3 +69,42 @@ export interface BuildingToiletTree {
   buildingName: string
   floors: FloorToiletGroup[]
 }
+
+export interface DataSource {
+  code: string
+  name: string
+}
+
+export interface RelInfoCodeConfig {
+  additionalMapValue: Record<string, unknown>
+  dataSource: DataSource[]
+  dataTime: string
+  dataValue: string
+  infoCode: string
+  infoCodeName: string
+  aliasName: string
+  infoCodeType: string
+  existsIotRule: boolean
+  relTemplateTypeId: string
+  sequence: number
+  originDataType: string
+}
+
+export interface RelInfoCodeGroupConfig {
+  groupChildren?: RelInfoCodeGroupConfig[]
+  groupCode: string
+  groupName: string
+  groupOrder: number
+  relInfoCodeConfigs: RelInfoCodeConfig[]
+}
+
+export interface EquipmentDetail {
+  id: string
+  localName: string
+  objType: string
+  classCode: string
+  dynamicName: string
+  templateTypeId: string
+  templateTypeName: string
+  relInfoCodeGroupConfigs: RelInfoCodeGroupConfig[]
+}

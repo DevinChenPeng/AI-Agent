@@ -2,7 +2,7 @@
 	 "React ClassName": {
     "prefix": "rc",
     "body": [
-      "className={cn(styles)}",
+      "className={cn(styles.${1:})}",
     ],
     "description": "创建 CSS 模块类名"
   },
@@ -168,6 +168,86 @@
       "const ${1:ref} = useRef$2($3)"
     ],
     "description": "useRef Hook"
+  },
+  "useContext Hook": {
+    "prefix": "uctx",
+    "body": [
+      "const ${1:value} = useContext(${2:MyContext})"
+    ],
+    "description": "useContext Hook"
+  },
+  "useReducer Hook": {
+    "prefix": "urd",
+    "body": [
+      "const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer}, ${4:initialState})"
+    ],
+    "description": "useReducer Hook"
+  },
+  "useLayoutEffect Hook": {
+    "prefix": "ule",
+    "body": [
+      "useLayoutEffect(() => {",
+      "  $1",
+      "}, [$2])"
+    ],
+    "description": "useLayoutEffect Hook"
+  },
+  "useImperativeHandle Hook": {
+    "prefix": "uih",
+    "body": [
+      "useImperativeHandle(${1:ref}, () => ({",
+      "  $2",
+      "}), [$3])"
+    ],
+    "description": "useImperativeHandle Hook"
+  },
+  "useDebugValue Hook": {
+    "prefix": "udv",
+    "body": [
+      "useDebugValue(${1:value})"
+    ],
+    "description": "useDebugValue Hook"
+  },
+  "useDeferredValue Hook": {
+    "prefix": "udfv",
+    "body": [
+      "const ${1:deferredValue} = useDeferredValue(${2:value})"
+    ],
+    "description": "useDeferredValue Hook (React 18+)"
+  },
+  "useTransition Hook": {
+    "prefix": "utr",
+    "body": [
+      "const [${1:isPending}, ${2:startTransition}] = useTransition()"
+    ],
+    "description": "useTransition Hook (React 18+)"
+  },
+  "useId Hook": {
+    "prefix": "uid",
+    "body": [
+      "const ${1:id} = useId()"
+    ],
+    "description": "useId Hook (React 18+)"
+  },
+  "useSyncExternalStore Hook": {
+    "prefix": "uses",
+    "body": [
+      "const ${1:state} = useSyncExternalStore(",
+      "  ${2:subscribe},",
+      "  ${3:getSnapshot},",
+      "  ${4:getServerSnapshot}",
+      ")"
+    ],
+    "description": "useSyncExternalStore Hook (React 18+)"
+  },
+  "useInsertionEffect Hook": {
+    "prefix": "uie",
+    "body": [
+      "useInsertionEffect(() => {",
+      "  $1",
+      "}, [$2])"
+    ],
+    "description": "useInsertionEffect Hook (React 18+)"
   },
   "TypeScript Interface": {
     "prefix": "tsi",
