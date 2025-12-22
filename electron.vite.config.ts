@@ -15,7 +15,20 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [react()],
+    plugins: [
+      react({
+        babel: {
+          plugins: [
+            [
+              'babel-plugin-react-compiler',
+              {
+                target: '19' // keep the compiler aligned with React 19 runtime
+              }
+            ]
+          ]
+        }
+      })
+    ],
     css: {
       preprocessorOptions: {
         less: {
