@@ -19,6 +19,54 @@ export interface BaseData {
   toiletSpaceMap: Map<string, ToiletSpaceItem>
   toiletTreeData: BuildingToiletTree[]
 }
+/**
+ * 将卫生间列表转换为树形结构
+ * @param toilets - 卫生间列表
+ * @param buildFloorMap - 建筑楼层映射表
+ * @returns 树形结构数据
+ */
+const buildToiletTree = (
+  toilets: ToiletSpaceItem[],
+  buildFloorMap: Map<string, Build | Floor>
+): BuildingToiletTree[] => {
+  // 按建筑ID分组
+  const buildingMap = new Map<string, ToiletSpaceItem[]>()
+  toilets.forEach(toilet => {
+    const existing = buildingMap.get(toilet.buildingId) || []
+    buildingMap.set(toilet.buildingId, [...existing, toilet])
+  })
+
+  // 构建树形结构
+  const treeData: BuildingToiletTree[] = []
+  buildingMap.forEach((toiletsInBuilding, buildingId) => {
+    const building = buildFloorMap.get(buildingId) as Build | undefined
+
+    // 按楼层ID分组
+    const floorMap = new Map<string, ToiletSpaceItem[]>()
+    toiletsInBuilding.forEach(toilet => {
+      const existing = floorMap.get(toilet.floorId) || []
+      floorMap.set(toilet.floorId, [...existing, toilet])
+    })
+
+    // 构建楼层分组
+    const floors = Array.from(floorMap.entries()).map(([floorId, toilets]) => {
+      const floor = buildFloorMap.get(floorId) as Floor | undefined
+      return {
+        floorId,
+        floorName: floor?.localName || floor?.name || floorId,
+        toilets
+      }
+    })
+
+    treeData.push({
+      buildingId,
+      buildingName: building?.localName || building?.name || buildingId,
+      floors
+    })
+  })
+
+  return treeData
+}
 export const useBaseData = (): BaseData => {
   const [buildFloorMap, setBuildFloorMap] = useState<Map<string, Build | Floor>>(new Map())
   const [toiletSpaceMap, setToiletSpaceMap] = useState<Map<string, ToiletSpaceItem>>(new Map())
@@ -60,60 +108,16 @@ export const useBaseData = (): BaseData => {
       console.log(error)
     }
   }
-
-  /**
-   * 将卫生间列表转换为树形结构
-   * @param toilets - 卫生间列表
-   * @param buildFloorMap - 建筑楼层映射表
-   * @returns 树形结构数据
-   */
-  const buildToiletTree = (
-    toilets: ToiletSpaceItem[],
-    buildFloorMap: Map<string, Build | Floor>
-  ): BuildingToiletTree[] => {
-    // 按建筑ID分组
-    const buildingMap = new Map<string, ToiletSpaceItem[]>()
-    toilets.forEach(toilet => {
-      const existing = buildingMap.get(toilet.buildingId) || []
-      buildingMap.set(toilet.buildingId, [...existing, toilet])
-    })
-
-    // 构建树形结构
-    const treeData: BuildingToiletTree[] = []
-    buildingMap.forEach((toiletsInBuilding, buildingId) => {
-      const building = buildFloorMap.get(buildingId) as Build | undefined
-
-      // 按楼层ID分组
-      const floorMap = new Map<string, ToiletSpaceItem[]>()
-      toiletsInBuilding.forEach(toilet => {
-        const existing = floorMap.get(toilet.floorId) || []
-        floorMap.set(toilet.floorId, [...existing, toilet])
-      })
-
-      // 构建楼层分组
-      const floors = Array.from(floorMap.entries()).map(([floorId, toilets]) => {
-        const floor = buildFloorMap.get(floorId) as Floor | undefined
-        return {
-          floorId,
-          floorName: floor?.localName || floor?.name || floorId,
-          toilets
-        }
-      })
-
-      treeData.push({
-        buildingId,
-        buildingName: building?.localName || building?.name || buildingId,
-        floors
-      })
-    })
-
-    return treeData
-  }
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       startLoading()
       await getLocaltionData()
       await getToiletList()
+      if (toiletSpaceMap.size > 0 && buildFloorMap.size > 0) {
+        const arr = Array.from(toiletSpaceMap.values())
+        const tree = buildToiletTree(arr, buildFloorMap)
+        setToiletTreeData(tree)
+      }
       stopLoading()
     }
     fetchData()
@@ -121,15 +125,5 @@ export const useBaseData = (): BaseData => {
       cancelQuest()
     }
   }, [])
-
-  // 当数据更新时，重新构建树形结构
-  useEffect(() => {
-    if (toiletSpaceMap.size > 0 && buildFloorMap.size > 0) {
-      const arr = Array.from(toiletSpaceMap.values())
-      const tree = buildToiletTree(arr, buildFloorMap)
-      setToiletTreeData(tree)
-    }
-  }, [toiletSpaceMap, buildFloorMap])
-
   return { buildFloorMap, toiletSpaceMap, toiletTreeData }
 }
