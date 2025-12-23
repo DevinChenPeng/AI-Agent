@@ -8,14 +8,14 @@ import { AppContext } from './contexts'
 
 function List(): React.JSX.Element {
   const [isFold, setIsFold] = useState(false)
-  const { toiletSpaceMap, toiletTreeData } = useBaseData()
+  const { toiletSpaceMap, toiletTreeData, loading, objectInfo, objectDataMap, getObjectDataByInfoCode } = useBaseData()
   return (
     <div className={cn(styles.run_monitor, 'wh-full')}>
-      <AppContext.Provider value={{ toiletSpaceMap }}>
+      <AppContext.Provider value={{ toiletSpaceMap, objectInfo, objectDataMap, getObjectDataByInfoCode }}>
         <ExpansionCollapse
           isFold={isFold}
           setIsFold={setIsFold}
-          left={<Left toiletTreeData={toiletTreeData} />}
+          left={<Left toiletTreeData={toiletTreeData} loading={loading} />}
         ></ExpansionCollapse>
       </AppContext.Provider>
     </div>

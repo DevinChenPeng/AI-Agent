@@ -1,4 +1,4 @@
-import { HashRouter as Router, useRoutes } from 'react-router-dom'
+import { HashRouter, useRoutes } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import routes from '@renderer/routes'
@@ -12,11 +12,11 @@ function AppRoutes(): React.JSX.Element | null {
 function App(): React.JSX.Element {
   return (
     <ConfigProvider locale={zhCN} theme={antdTheme}>
-      <Router>
+      <HashRouter>
         <Layout>
           <AppRoutes />
         </Layout>
-      </Router>
+      </HashRouter>
     </ConfigProvider>
   )
 }

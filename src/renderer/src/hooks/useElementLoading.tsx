@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
-import { createRoot, Root } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { Spin, SpinProps } from 'antd'
 
 interface UseElementLoadingReturn {
@@ -16,13 +16,11 @@ interface UseElementLoadingReturn {
  */
 export const useElementLoading = (
   selector: string,
-  containerStyle: CSSStyleDeclaration | null = null,
+  containerStyle: Partial<CSSStyleDeclaration> | null = null,
   spinProps?: SpinProps
 ): UseElementLoadingReturn => {
   const [loading, setLoading] = useState(false)
-  const rootRef = useRef<Root | null>(null)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const originalPositionRef = useRef<string>('')
+  const cleanupTokenRef = useRef<symbol | null>(null)
 
   const startLoading = useCallback(() => {
     setLoading(true)
@@ -35,16 +33,20 @@ export const useElementLoading = (
   useEffect(() => {
     if (!loading) return
 
-    const targetElement = document.querySelector(selector) as HTMLElement
+    const targetElement = document.querySelector(selector) as HTMLElement | null
     if (!targetElement) {
       console.warn(`useElementLoading: Element with selector "${selector}" not found.`)
       return
     }
 
+    const effectToken = Symbol('element-loading')
+    cleanupTokenRef.current = effectToken
+
     // 存储原始定位方式，如果是 static 则设置为 relative
     const computedStyle = window.getComputedStyle(targetElement)
-    originalPositionRef.current = targetElement.style.position
-    if (computedStyle.position === 'static') {
+    const originalPosition = targetElement.style.position
+    const shouldRestorePosition = computedStyle.position === 'static'
+    if (shouldRestorePosition) {
       targetElement.style.position = 'relative'
     }
 
@@ -65,29 +67,42 @@ export const useElementLoading = (
       Object.assign(container.style, containerStyle)
     }
     targetElement.appendChild(container)
-    containerRef.current = container
 
     // 渲染 Spin 组件
     const root = createRoot(container)
     root.render(<Spin {...spinProps} />)
-    rootRef.current = root
 
     // 清理函数
+    /**
+     * 返回一个清理函数，用于卸载React根组件并清理DOM容器
+     * 该函数使用微任务队列来延迟执行清理操作，确保在当前渲染周期结束后执行
+     * @returns 无返回值的清理函数
+     */
     return () => {
-      if (rootRef.current) {
-        rootRef.current.unmount()
-        rootRef.current = null
-      }
-      if (containerRef.current && containerRef.current.parentNode) {
-        containerRef.current.parentNode.removeChild(containerRef.current)
-        containerRef.current = null
-      }
-      // 恢复原始定位方式
-      if (targetElement) {
-        targetElement.style.position = originalPositionRef.current
-      }
+      // 根据浏览器支持情况选择合适的微任务调度方式
+      // 优先使用queueMicrotask，降级使用Promise.then
+      const schedule: (callback: VoidFunction) => void =
+        typeof queueMicrotask === 'function'
+          ? queueMicrotask
+          : (cb: VoidFunction) => {
+              Promise.resolve().then(cb)
+            }
+
+      // 将清理操作调度到微任务队列中执行
+      schedule(() => {
+        root.unmount()
+        if (container.parentNode) {
+          container.parentNode.removeChild(container)
+        }
+        if (cleanupTokenRef.current === effectToken) {
+          cleanupTokenRef.current = null
+          if (shouldRestorePosition) {
+            targetElement.style.position = originalPosition
+          }
+        }
+      })
     }
-  }, [loading, selector, spinProps])
+  }, [loading, selector, containerStyle, spinProps])
 
   return { loading, startLoading, stopLoading }
 }

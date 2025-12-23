@@ -69,3 +69,79 @@ export interface Space extends BaseLocationEntity {
   buildingId: string
   floorId: string
 }
+
+/**
+ * InfoCode 数据项描述
+ * @property {Record<string, unknown>} additionalMapValue - 额外的键值对数据
+ * @property {Array<{ code: string; name: string }>} dataSource - 数据源数组
+ * @property {string} dataTime - 数据时间
+ * @property {string} dataValue - 数据值
+ * @property {string} infoCode - 信息代码
+ * @property {string} infoCodeName - 信息代码名称
+ * @property {string} aliasName - 别名
+ * @property {string} infoCodeType - 信息代码类型
+ * @property {boolean} existsIotRule - 是否存在物联网规则
+ * @property {string} relTemplateTypeId - 关联的模板类型ID
+ * @property {number} sequence - 序列号
+ * @property {string} originDataType - 原始数据类型
+ */
+export interface InfoCodeDataItem {
+  additionalMapValue: Record<string, unknown>
+  dataSource: Array<DataSource>
+  dataTime: string
+  dataValue: string
+  infoCode: string
+  infoCodeName: string
+  aliasName: string
+  infoCodeType: string
+  existsIotRule: boolean
+  relTemplateTypeId: string
+  sequence: number
+  originDataType: string
+  unit?: string
+}
+/**
+ * 数据源接口
+ * @property {string} code - 代码
+ * @property {string} name - 名称
+ */
+export interface DataSource {
+  code: string
+  name: string
+}
+/**
+ * 信息代码组配置接口
+ * @property {RelInfoCodeGroupConfig[]} [groupChildren] - 子组配置（可选）
+ * @property {string} groupCode - 组代码
+ * @property {string} groupName - 组名称
+ * @property {number} groupOrder - 组顺序
+ * @property {InfoCodeDataItem[]} relInfoCodeConfigs - 关联的信息代码配置
+ */
+export interface RelInfoCodeGroupConfig {
+  groupChildren?: RelInfoCodeGroupConfig[]
+  groupCode: string
+  groupName: string
+  groupOrder: number
+  relInfoCodeConfigs: InfoCodeDataItem[]
+}
+/**
+ * 设备详情接口
+ * @property {string} id - 设备ID
+ * @property {string} localName - 本地名称
+ * @property {string} objType - 对象类型
+ * @property {string} classCode - 类别代码
+ * @property {string} dynamicName - 动态名称
+ * @property {string} templateTypeId - 模板类型ID
+ * @property {string} templateTypeName - 模板类型名称
+ * @property {RelInfoCodeGroupConfig[]} relInfoCodeGroupConfigs - 关联的信息代码组配置
+ */
+export interface EquipmentDetail {
+  id: string
+  localName: string
+  objType: string
+  classCode: string
+  dynamicName: string
+  templateTypeId: string
+  templateTypeName: string
+  relInfoCodeGroupConfigs: RelInfoCodeGroupConfig[]
+}

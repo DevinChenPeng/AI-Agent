@@ -5,7 +5,7 @@ import { BuildingToiletTree } from '../types'
 import { Collapse, CollapseProps } from 'antd'
 import FloorItem from './FloorItem'
 import { CaretRightOutlined } from '@ant-design/icons'
-
+import { DynamicIcon } from '@renderer/components/DynamicIcon'
 interface BuildFLoorTreeProps {
   toiletTreeData: BuildingToiletTree[]
 }
@@ -35,7 +35,7 @@ const BuildFLoorTree: FC<BuildFLoorTreeProps> = props => {
         expandIcon={panelProps => {
           return (
             <div className={cn(styles.expand_icon, panelProps.isActive && styles.isActive)}>
-              {<CaretRightOutlined />}
+              {<DynamicIcon name="CaretRightOutlined" />}
             </div>
           )
         }}

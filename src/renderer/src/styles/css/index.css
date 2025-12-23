@@ -2,6 +2,8 @@
  * 全局样式入口文件
  * 按模块导入所有样式文件
  */
+/* 字体 */
+@import './font.css';
 
 /* CSS变量 - 必须最先导入 */
 @import './variables.css';

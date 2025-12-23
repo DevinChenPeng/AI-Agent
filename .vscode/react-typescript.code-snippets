@@ -299,5 +299,12 @@
       "}"
     ],
     "description": "Try-Catch 块"
-  }
+  },
+	"cLog": {
+    "prefix": "clog",
+    "body": [
+      "console.log(${1:})"
+    ],
+    "description": "创建日志输出"
+  },
 }

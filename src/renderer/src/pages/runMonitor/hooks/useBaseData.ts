@@ -1,11 +1,13 @@
 import { treeBuildingFloorSpace } from '@renderer/api/common'
 import { TOILET, listInfoCodeConfigsByObjectId } from '@renderer/api/runMonitor'
-import { Build, Floor } from '@renderer/types/common'
+import { Build, EquipmentDetail, Floor, InfoCodeDataItem } from '@renderer/types/common'
 import getCancelToken from '@renderer/utils/http/getCancelToken'
 import { useEffect, useState } from 'react'
 import { ToiletSpaceItem, BuildingToiletTree } from '../types'
 import { HTTP_STATUS } from '@renderer/constants/http'
 import { useElementLoading } from '@renderer/hooks/useElementLoading'
+import { useIotData } from '@renderer/hooks/useIotData'
+import { IotObjectInfo } from '@renderer/store/slices/IotSlice'
 const { cancelToken, cancelQuest } = getCancelToken()
 
 /**
@@ -17,7 +19,11 @@ const { cancelToken, cancelQuest } = getCancelToken()
 export interface BaseData {
   buildFloorMap: Map<string, Build | Floor>
   toiletSpaceMap: Map<string, ToiletSpaceItem>
+  objectDataMap: Map<string, EquipmentDetail>
   toiletTreeData: BuildingToiletTree[]
+  loading: boolean
+  getObjectDataByInfoCode: (id: string, infoCode?: string) => InfoCodeDataItem | null
+  objectInfo: IotObjectInfo
 }
 /**
  * 将卫生间列表转换为树形结构
@@ -70,12 +76,13 @@ const buildToiletTree = (
 export const useBaseData = (): BaseData => {
   const [buildFloorMap, setBuildFloorMap] = useState<Map<string, Build | Floor>>(new Map())
   const [toiletSpaceMap, setToiletSpaceMap] = useState<Map<string, ToiletSpaceItem>>(new Map())
+  const [objectDataMap, setObjectDataMap] = useState<Map<string, EquipmentDetail>>(new Map())
   const [toiletTreeData, setToiletTreeData] = useState<BuildingToiletTree[]>([])
-  const { startLoading, stopLoading } = useElementLoading('#left', null)
-  const getLocaltionData = async (): Promise<void> => {
-    cancelQuest()
+  const { startLoading, stopLoading, loading } = useElementLoading('#left', null)
+  const { objectInfo, getEquipmentInfoCodes, getObjectDataByInfoCode } = useIotData()
+  const getLocaltionData = async (): Promise<Map<string, Build | Floor>> => {
     try {
-      const map = new Map()
+      const map = new Map<string, Build | Floor>()
       const res = await treeBuildingFloorSpace({ cancelToken: cancelToken() })
       res.data.forEach(item => {
         map.set(item.id, item)
@@ -83,47 +90,68 @@ export const useBaseData = (): BaseData => {
           map.set(floor.id, floor)
         })
       })
-      setBuildFloorMap(map)
+      return map
     } catch (error) {
       console.log(error)
+      return new Map()
     }
   }
-  const getToiletList = async (): Promise<void> => {
+
+  const getToiletList = async (): Promise<Map<string, ToiletSpaceItem>> => {
     try {
-      const map = new Map()
+      const map = new Map<string, ToiletSpaceItem>()
       const res = await TOILET(
         {
           withColumns: ['id', 'buildingId', 'localName', 'floorId', 'classCode', 'funcType', 'roomFuncType', 'objType']
         },
         { cancelToken: cancelToken() }
       )
-
+      const sapceAndEquipmentIds = new Set<string>()
       if (res.code === HTTP_STATUS.SUCCESS_CODE) {
         res.data?.forEach(item => {
+          sapceAndEquipmentIds.add(item.id)
+          item.equipments.forEach(equipment => {
+            sapceAndEquipmentIds.add(equipment.id)
+          })
           map.set(item.id, item)
         })
-        setToiletSpaceMap(map)
+        const infoCodeRes = await getEquipmentInfoCodes(Array.from(sapceAndEquipmentIds))
+        const objMap = new Map<string, EquipmentDetail>()
+        infoCodeRes.forEach(infoCodeItem => {
+          objMap.set(infoCodeItem.id, infoCodeItem)
+        })
+        setObjectDataMap(objMap)
       }
+
+      return map
     } catch (error) {
       console.log(error)
+      return new Map()
     }
   }
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
+      cancelQuest()
       startLoading()
-      await getLocaltionData()
-      await getToiletList()
-      if (toiletSpaceMap.size > 0 && buildFloorMap.size > 0) {
-        const arr = Array.from(toiletSpaceMap.values())
-        const tree = buildToiletTree(arr, buildFloorMap)
-        setToiletTreeData(tree)
+      try {
+        const buildingMap = await getLocaltionData()
+        const toiletMap = await getToiletList()
+        setBuildFloorMap(buildingMap)
+        setToiletSpaceMap(toiletMap)
+        if (buildingMap.size > 0 && toiletMap.size > 0) {
+          const tree = buildToiletTree(Array.from(toiletMap.values()), buildingMap)
+          setToiletTreeData(tree)
+        } else {
+          setToiletTreeData([])
+        }
+      } finally {
+        stopLoading()
       }
-      stopLoading()
     }
     fetchData()
     return () => {
       cancelQuest()
     }
   }, [])
-  return { buildFloorMap, toiletSpaceMap, toiletTreeData }
+  return { buildFloorMap, toiletSpaceMap, toiletTreeData, loading, objectInfo, objectDataMap, getObjectDataByInfoCode }
 }

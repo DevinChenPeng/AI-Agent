@@ -1,0 +1,238 @@
+#app {
+  height: 100%;
+  overflow-x: overlay;
+  color: var(--gray-900);
+  width: 100%;
+
+  // overflow-y: hidden;
+}
+.h100 {
+  height: 100%;
+}
+.w100 {
+  width: 100%;
+}
+.wh100 {
+  height: 100%;
+  width: 100%;
+}
+.fw700 {
+  font-weight: 700;
+}
+.fw600 {
+  font-weight: 600;
+}
+.fw500 {
+  font-weight: 500;
+}
+.f {
+  display: flex;
+}
+.fw {
+  flex-wrap: wrap;
+}
+.fc {
+  display: flex;
+  align-items: center;
+}
+.fb {
+  display: flex;
+  justify-content: space-between;
+}
+.fa {
+  display: flex;
+  justify-content: space-around;
+}
+.fca {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.fcb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fcc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.fcol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fd {
+  display: flex;
+  align-items: end;
+}
+.position-center {
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
+.mb {
+  margin-bottom: 30px;
+}
+.tc {
+  width: 120px;
+  height: 22px;
+  color: #646a73;
+}
+.ml {
+  margin-left: 16px;
+}
+.fs12 {
+  font-size: 12px;
+}
+.fs14 {
+  font-size: 14px;
+}
+.fs16 {
+  font-size: 16px;
+}
+.fs18 {
+  font-size: 18px;
+}
+.fs20 {
+  font-size: 20px;
+}
+.fs22 {
+  font-size: 22px;
+}
+.fs24 {
+  font-size: 24px;
+}
+/* stylelint-disable-next-line selector-class-pattern */
+.minScroll {
+  min-width: 1140px;
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.auto-loading {
+  cursor: not-allowed;
+  color: rgb(139 148 158);
+  .m-button-span {
+    display: none;
+  }
+  &::before {
+    color: rgb(139 148 158);
+    animation: rotate 1s linear infinite;
+  }
+}
+.before {
+  position: relative;
+  &::before {
+    position: absolute;
+    content: '';
+    display: block;
+  }
+}
+// 定义一个变量来控制循环的次数，这里假设生成从14px到20px的字体大小样式类
+@max-font-size: 30;
+@min-font-size: 14;
+
+// 循环生成样式类
+.generate-font-size-classes(@loop-counter: @min-font-size) when (@loop-counter <= @max-font-size) {
+  .fs@{loop-counter} {
+    font-size: @loop-counter + 0px;
+  }
+  // 使用新的临时变量来控制下一次循环，每次增加2
+  @next-counter: @loop-counter + 2;
+  .generate-font-size-classes(@next-counter);
+}
+
+// 调用函数来触发循环生成样式
+.generate-font-size-classes();
+@font-face {
+  font-family: 'PersagyRegular-aasd';
+  src: url('@/assets/font/Persagy2.0-Regular-aasd.ttf');
+}
+
+@font-face {
+  font-family: 'PersagyMedium';
+  src: url('@/assets/font/Persagy2.0-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'PersagyBold';
+  src: url('@/assets/font/Persagy2.0-Bold.ttf');
+}
+.ffCP {
+  font-family: 'PersagyRegular-aasd', 'PersagyMedium', 'PersagyBold';
+}
+.ffCustom-M {
+  font-family: 'PersagyMedium', 'PersagyBold';
+}
+/* 滚动条样式 */
+.hoverScrollbar::-webkit-scrollbar {
+  width: 6px !important; /*  设置纵轴（y轴）轴滚动条 */
+}
+/* 滚动条滑块（里面小方块） */
+.hoverScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background: transparent;
+}
+/* 滚动条轨道 */
+.hoverScrollbar::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: transparent;
+}
+
+/* hover时显色 */
+.hoverScrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(196, 201, 207, 0.8);
+}
+/* hover时显色 */
+.hoverScrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(196, 201, 207, 1);
+}
+.hoverScrollbar:hover::-webkit-scrollbar-track {
+  background: rgba(196, 201, 207, 0.8);
+}
+.link-text {
+  color: var(--blue-500);
+  cursor: pointer;
+}
+
+.group-name-detail-configuration {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-800);
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 12px;
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: var(--blue-500);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

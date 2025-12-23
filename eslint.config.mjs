@@ -32,6 +32,7 @@ export default defineConfig(
       '@typescript-eslint/no-confusing-void-expression': 'off',
       // 仅关闭对 `void` 类型位置的校验（如返回/泛型中的 void），避免报错
       '@typescript-eslint/no-invalid-void-type': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {

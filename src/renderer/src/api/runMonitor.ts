@@ -1,5 +1,5 @@
-import { EquipmentDetail, ToiletSpaceItem } from '@renderer/pages/runMonitor/types'
-import { HttpResponse } from '@renderer/types/common'
+import { ToiletSpaceItem } from '@renderer/pages/runMonitor/types'
+import { HttpResponse, EquipmentDetail } from '@renderer/types/common'
 import http from '@renderer/utils/http'
 import { AxiosRequestConfig, CancelToken } from 'axios'
 
