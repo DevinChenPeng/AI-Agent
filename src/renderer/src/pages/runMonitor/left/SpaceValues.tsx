@@ -27,15 +27,14 @@ const SpaceValues: FC<SpaceValuesProps> = props => {
 
     const arr: ValueAndNameProps[] = []
     const spaceData: EquipmentDetail = objectDataMap.get(props.space.id)
-    const equipmentsByCFIDBP = equipments.filter(equipment => equipment.classCode === 'CFIDBP')
     // 空闲卫生间隔间数 卫生间隔间的信息点【厕位占用状态】ifOccupied=0“无人”的数量
-    const freeCount = equipmentsByCFIDBP.filter(equipment =>
+    const freeCount = equipments.filter(equipment =>
       IF_OCCUPIED.unoccupied.values.includes(getObjectDataByInfoCode(equipment.id, 'ifOccupied')?.dataValue as string)
     ).length
-    if (equipmentsByCFIDBP.length) {
+    if (equipments.length) {
       arr.unshift({
         name: '空闲/总坑位',
-        value: `${freeCount}/${equipmentsByCFIDBP.length}`,
+        value: `${freeCount}/${equipments.length}`,
         infoCode: 'freeCount',
         sequence: 1
       })
