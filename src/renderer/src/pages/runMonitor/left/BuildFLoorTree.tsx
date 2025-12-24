@@ -4,7 +4,6 @@ import styles from './styles/build.module.less'
 import { BuildingToiletTree } from '../types'
 import { Collapse, CollapseProps } from 'antd'
 import FloorItem from './FloorItem'
-import { CaretRightOutlined } from '@ant-design/icons'
 import { DynamicIcon } from '@renderer/components/DynamicIcon'
 interface BuildFLoorTreeProps {
   toiletTreeData: BuildingToiletTree[]

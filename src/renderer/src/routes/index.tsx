@@ -6,6 +6,7 @@ import type { IconName } from '@renderer/components/DynamicIcon'
 // 懒加载页面组件
 const AI = lazy(() => import('../pages/AI/index'))
 const RunMonitor = lazy(() => import('../pages/runMonitor/index'))
+const Ipc = lazy(() => import('../pages/IPC/index'))
 
 // 路由懒加载包装器
 const lazyLoad = (
@@ -34,6 +35,12 @@ const routes: RouteConfig[] = [
     name: '运行监控',
     icon: 'DashboardOutlined',
     element: lazyLoad(RunMonitor)
+  },
+  {
+    path: '/ipc',
+    name: '通信监控',
+    icon: 'message',
+    element: lazyLoad(Ipc)
   },
   {
     path: '*',

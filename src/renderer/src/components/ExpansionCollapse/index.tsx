@@ -1,7 +1,7 @@
 import { cn } from '@renderer/utils/classNames'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './index.module.less'
-import { RightOutlined, LeftOutlined } from '@ant-design/icons'
+import { RightOutlined } from '@ant-design/icons'
 interface ExpansionCollapseProps {
   left?: React.ReactNode
   right?: React.ReactNode

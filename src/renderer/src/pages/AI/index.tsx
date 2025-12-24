@@ -8,7 +8,7 @@ const { AI_list_container, is_new, name, chat_list } = styles
 
 interface ComponentNameProps {}
 
-const ComponentName: FC<ComponentNameProps> = props => {
+const ComponentName: FC<ComponentNameProps> = () => {
   const { chatList, onSendMessage } = useBaseHooks()
   const isNew = chatList.length === 0
   const list = chatList.map((item, index) => <ViewContainer data={item} key={index + item.question}></ViewContainer>)

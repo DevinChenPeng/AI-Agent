@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain, screen, session } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import ipc from './ipc'
 
 // 禁用 Electron 的安全警告（开发环境可选）
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
@@ -70,7 +71,7 @@ app.whenReady().then(async () => {
   })
 
   // IPC 测试
-  ipcMain.on('ping', () => console.log('pong'))
+  ipc()
 
   createWindow()
 

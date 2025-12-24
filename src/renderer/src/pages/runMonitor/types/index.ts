@@ -1,4 +1,4 @@
-import { BaseObject, InfoCodeDataItem } from '@renderer/types/common'
+import { BaseObject } from '@renderer/types/common'
 
 /**
  * 设备信息接口

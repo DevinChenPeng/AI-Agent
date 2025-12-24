@@ -1,5 +1,5 @@
 import { treeBuildingFloorSpace } from '@renderer/api/common'
-import { TOILET, listInfoCodeConfigsByObjectId } from '@renderer/api/runMonitor'
+import { TOILET } from '@renderer/api/runMonitor'
 import { Build, EquipmentDetail, Floor, InfoCodeDataItem } from '@renderer/types/common'
 import getCancelToken from '@renderer/utils/http/getCancelToken'
 import { useEffect, useState } from 'react'

@@ -155,7 +155,7 @@ export class FetchEventStream {
         response.body!,
         handleLines(
           getMessages(
-            id => {
+            () => {
               // console.log(id)
             },
             retry => {
